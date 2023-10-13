@@ -10,33 +10,82 @@ namespace PrimerParcial
     {
         protected string nombre;
         protected int legajo;
-        protected int antiguedad;
-        protected bool disponibleHorasExtras = true;
+        protected ETurnos turnoDeTrabajo;
+        protected bool disponibleHorasExtras;
 
         private Empleado(string nombre)
         {
             this.nombre = nombre;
-            this.antiguedad = 0;
+            this.disponibleHorasExtras = true;
         }
 
-        public Empleado(string nombre, int legajo):this(nombre)
+        private Empleado(string nombre, int legajo):this(nombre)
         {
             this.legajo = legajo;
         }
 
-        public Empleado(string nombre, int legajo, int antiguedad):this(nombre, legajo)
+        protected Empleado(string nombre, int legajo, ETurnos turnoDeTrabajo):this(nombre, legajo)
         {
-            this.antiguedad = antiguedad;
+            this.turnoDeTrabajo = turnoDeTrabajo;
         }
 
-        protected abstract void CambiarHorasExtras();
+        public abstract void CambiarDisponibilidadHorasExtras();
 
-        protected virtual string MostrarDatos()
+        public virtual string MostrarDatos()
         {
             StringBuilder sb = new StringBuilder();
+            string haceHorasExtra;
 
-            sb.AppendLine($"{this.nombre} - {this.legajo} - {this.antiguedad}");
+            if(this.disponibleHorasExtras)
+            {
+                haceHorasExtra = "Si";
+            }
+            else
+            {
+                haceHorasExtra = "No";
+            }
+
+            sb.AppendLine($"Nombre: {this.nombre}");
+            sb.AppendLine($"Legajo: {this.legajo}");
+            sb.AppendLine($"Turno de trabajo: {this.turnoDeTrabajo}");            
+            sb.AppendLine($"Disponible para horas extras: {haceHorasExtra}");
+
             return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.MostrarDatos();
+        } 
+
+        public override bool Equals(object obj)
+        {
+            return this == (Empleado)obj;
+        }
+
+        public static bool operator ==(Empleado primerEmpleado, Empleado segundoEmpleado)
+        {
+            string nombrePrimerEmpleado = primerEmpleado;
+            string nombreSegundoEmpleado = segundoEmpleado;
+            int legajoPrimerEmpleado = primerEmpleado;
+            int legajoSegundoEmpleado = segundoEmpleado;
+
+            return nombrePrimerEmpleado == nombreSegundoEmpleado && legajoPrimerEmpleado == legajoSegundoEmpleado;
+        }
+
+        public static bool operator !=(Empleado primerEmpleado, Empleado segundoEmpleado)
+        {
+            return !(primerEmpleado == segundoEmpleado);
+        }
+
+        public static implicit operator string(Empleado empleado)
+        {
+            return empleado.nombre;
+        }
+
+        public static implicit operator int(Empleado empleado)
+        {
+            return empleado.legajo;
         }
     }
 }

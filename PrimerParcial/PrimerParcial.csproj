@@ -45,6 +45,7 @@
     <Compile Include="Cocinero.cs" />
     <Compile Include="Empleados.cs" />
     <Compile Include="Enumerados.cs" />
+    <Compile Include="ListadoEmpleados.cs" />
     <Compile Include="Mesero.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
