@@ -25,6 +25,18 @@ namespace PrimerParcial
             this.cajaAsignada = cajaAsignada;
         }
 
+        public int PropinaActual
+        {
+            get { return this.propinaActual; }
+            set { this.propinaActual = value; }
+        }
+
+        public int CajaAsignada
+        {
+            get { return this.cajaAsignada; }
+            set { this.cajaAsignada = value; }
+        }
+
         public override void CambiarDisponibilidadHorasExtras()
         {
             this.disponibleHorasExtras = !this.disponibleHorasExtras;

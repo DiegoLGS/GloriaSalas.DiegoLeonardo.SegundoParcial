@@ -20,9 +20,21 @@ namespace PrimerParcial
             this.especialidad = especialidad;
         }
 
-        public Cocinero(string nombre, int legajo, ETurnos turnoDeTrabajo, string especialidad, string certificacion):this(nombre, legajo, turnoDeTrabajo, zonaDeAtencion)
+        public Cocinero(string nombre, int legajo, ETurnos turnoDeTrabajo, string especialidad, string certificacion):this(nombre, legajo, turnoDeTrabajo, especialidad)
         {
             this.certificacion = certificacion;
+        }
+
+        public string Especialidad
+        {
+            get { return this.especialidad; } 
+            set { this.especialidad = value; }
+        }
+
+        public string Certificacion
+        {
+            get { return this.certificacion; }
+            set { this.certificacion = value; }
         }
 
         public override void CambiarDisponibilidadHorasExtras()

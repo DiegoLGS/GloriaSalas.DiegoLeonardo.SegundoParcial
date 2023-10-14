@@ -25,6 +25,18 @@ namespace PrimerParcial
             this.numeroDeMesas = numeroDeMesas;
         }
 
+        public string ZonaDeAtencion
+        {
+            get { return this.zonaDeAtencion; }
+            set { this.zonaDeAtencion = value; }
+        }
+
+        public int NumeroDeMesas
+        {
+            get { return this.numeroDeMesas; }
+            set { this.numeroDeMesas= value; }
+        }
+
         public override void CambiarDisponibilidadHorasExtras()
         {
             this.disponibleHorasExtras = !this.disponibleHorasExtras;

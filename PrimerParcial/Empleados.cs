@@ -29,21 +29,36 @@ namespace PrimerParcial
             this.turnoDeTrabajo = turnoDeTrabajo;
         }
 
+        public string Nombre
+        {
+            get { return this.nombre; }
+            set { this.nombre = value; }
+        }
+
+        public int Legajo
+        {
+            get { return this.legajo; }
+            set { this.legajo = value; }
+        }
+
+        public ETurnos TurnoDeTrabajo
+        {
+            get { return this.turnoDeTrabajo; }
+            set { this.turnoDeTrabajo = value; }
+        }
+
+        public bool DisponibleHorasExtras
+        {
+            get { return this.disponibleHorasExtras; }
+            set { this.disponibleHorasExtras = value; }
+        }
+
         public abstract void CambiarDisponibilidadHorasExtras();
 
         public virtual string MostrarDatos()
         {
             StringBuilder sb = new StringBuilder();
-            string haceHorasExtra;
-
-            if(this.disponibleHorasExtras)
-            {
-                haceHorasExtra = "Si";
-            }
-            else
-            {
-                haceHorasExtra = "No";
-            }
+            string haceHorasExtra = this.disponibleHorasExtras ? "Si" : "No";
 
             sb.AppendLine($"Nombre: {this.nombre}");
             sb.AppendLine($"Legajo: {this.legajo}");
