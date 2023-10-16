@@ -13,55 +13,74 @@ namespace WinFormsEmpleados
 {
     public partial class FrmCocinero : FrmEmpleado
     {
-        private Cocinero nuevoCocinero;
+        private Cocinero nuevoEmpleado;
+        private Dictionary<string, CheckBox> especialidadesCheckBoxs;
 
         public FrmCocinero()
         {
             InitializeComponent();
+            especialidadesCheckBoxs = new Dictionary<string, CheckBox>
+            {
+                { "Reposteria", this.cbReposteria },
+                { "Parrilla", this.cbParrilla },
+                { "Gourmet", this.cbGourmet },
+                { "Vegana", this.cbVegana },
+                { "Pastas", this.cbPastas },
+                { "Pescados", this.cbPescados }
+            };
         }
 
-        public Cocinero NuevoCocinero { get { return this.nuevoCocinero; } }
+        public override Cocinero NuevoEmpleado { get { return this.nuevoEmpleado; } }
 
-        private void btnAceptar_ClickMesero(object sender, EventArgs e)
+        public FrmCocinero(Cocinero cocineroAModificar):this()
+        {            
+            base.EstablecerCamposComunes(cocineroAModificar);
+            this.EstablecerEspecialidades(cocineroAModificar.Especialidad);
+            this.txtCertificacion.Text = cocineroAModificar.Certificacion;
+        }
+
+        public Cocinero NuevoCocinero { get { return this.nuevoEmpleado; } }
+
+        private void btnAceptar_ClickCocinero(object sender, EventArgs e)
         {
             if (base.ComprobarCamposFormulario())
             {
                 ETurnos turnoElegido = base.ObtenerTurnoTrabajo();
                 string especialidades = this.ObtenerEspecialidades();
 
-                this.nuevoCocinero = new Cocinero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, especialidades, this.txtCertificacion.Text);
+                this.nuevoEmpleado = new Cocinero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, especialidades, this.txtCertificacion.Text);
                 this.DialogResult = DialogResult.OK;
             }
         }
 
         protected string ObtenerEspecialidades()
         {
-            Dictionary<CheckBox, string> checkBoxes = new Dictionary<CheckBox, string>
-            {
-                { this.cbReposteria, "Reposteria" },
-                { this.cbParrilla, "Parrilla" },
-                { this.cbGourmet, "Gourmet" },
-                { this.cbVegana, "Vegana" },
-                { this.cbPastas, "Pastas" },
-                { this.cbPescados, "Pescados" }
-            };
-
             string especialidadesSeleccionadas = "";
 
-            foreach (var par in checkBoxes)
+            foreach (var par in this.especialidadesCheckBoxs)
             {
-                if (par.Key.Checked)
+                if (par.Value.Checked)
                 {
-                    especialidadesSeleccionadas += par.Value + "\n";
+                    especialidadesSeleccionadas += par.Key + "\n";
                 }
             }
 
             return especialidadesSeleccionadas;
         }
 
-        private void btnAceptar_Click_1(object sender, EventArgs e)
-        {
 
+        private void EstablecerEspecialidades(string especialidades)
+        {
+            string[] lineas = especialidades.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string linea in lineas)
+            {
+                if (this.especialidadesCheckBoxs.ContainsKey(linea))
+                {
+                    this.especialidadesCheckBoxs[linea].Checked = true;
+                }
+            }
         }
+
     }
 }

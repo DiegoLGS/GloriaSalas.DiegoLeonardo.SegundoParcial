@@ -11,6 +11,12 @@ namespace PrimerParcial
     {
         public List<Empleado> listaDeEmpleados = new List<Empleado>();
 
+        public List<Empleado> ListaDeEmpleados 
+        {
+            get { return listaDeEmpleados; } 
+            set { listaDeEmpleados = value;}
+        }
+
         public void OrdenarLista(string parametroOrdenamiento, bool ascendente)
         {
             if(parametroOrdenamiento == "nombre")

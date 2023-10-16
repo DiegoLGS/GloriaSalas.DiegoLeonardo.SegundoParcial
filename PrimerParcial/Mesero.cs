@@ -43,11 +43,11 @@ namespace PrimerParcial
             Console.WriteLine("Disponibilidad para hacer horas extras cambiada");
         }
 
-        public override string MostrarDatos()
+        public override string MostrarDatos(string titulo)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(base.MostrarDatos());
+            sb.Append(base.MostrarDatos(titulo));
             sb.AppendLine($"Zona de atención: {this.zonaDeAtencion}");
             sb.AppendLine($"Número de mesas: {this.numeroDeMesas}");
 

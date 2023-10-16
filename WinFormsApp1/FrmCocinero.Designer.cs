@@ -43,7 +43,7 @@
             // 
             // btnAceptar
             // 
-            btnAceptar.Click += btnAceptar_Click_1;
+            btnAceptar.Click += btnAceptar_ClickCocinero;
             // 
             // groupBox1
             // 

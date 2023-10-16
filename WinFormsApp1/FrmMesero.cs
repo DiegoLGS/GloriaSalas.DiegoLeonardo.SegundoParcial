@@ -13,7 +13,7 @@ namespace WinFormsEmpleados
 {
     public partial class FrmMesero : FrmEmpleado
     {
-        private Mesero nuevoMesero;
+        private Mesero nuevoEmpleado;
 
         public FrmMesero()
         {
@@ -21,29 +21,27 @@ namespace WinFormsEmpleados
         }
 
         public FrmMesero(Mesero meseroAModificar):this()
-        {
-            this.txtNombre.Text = meseroAModificar.Nombre;
-            this.txtLegajo.Text = meseroAModificar.Legajo.ToString();
-            base.EstablecerTurnoTrabajo(meseroAModificar.TurnoDeTrabajo);
+        {            
+            base.EstablecerCamposComunes(meseroAModificar);
             this.EstablecerZonaAtencion(meseroAModificar.ZonaDeAtencion);
             this.txtNumeroDeMesas.Text = meseroAModificar.NumeroDeMesas.ToString();            
         }
 
-        public Mesero NuevoMesero { get { return this.nuevoMesero; } }
+        public override Mesero NuevoEmpleado { get { return this.nuevoEmpleado; } }
 
         private void btnAceptar_ClickMesero(object sender, EventArgs e)
         {
             if (base.ComprobarCamposFormulario())
             {
                 ETurnos turnoElegido = base.ObtenerTurnoTrabajo();
-                string zonaDeTrabajo = this.ObtenerZonaTrabajo();
+                string zonaDeTrabajo = this.ObtenerZonaAtencion();
 
-                this.nuevoMesero = new Mesero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, zonaDeTrabajo, int.Parse(this.txtNumeroDeMesas.Text));
+                this.nuevoEmpleado = new Mesero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, zonaDeTrabajo, int.Parse(this.txtNumeroDeMesas.Text));
                 this.DialogResult = DialogResult.OK;
             }
         }
 
-        private string ObtenerZonaTrabajo()
+        private string ObtenerZonaAtencion()
         {
             string zonaDeTrabajo;
 

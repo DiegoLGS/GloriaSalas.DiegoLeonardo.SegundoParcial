@@ -13,23 +13,30 @@ namespace WinFormsEmpleados
 {
     public partial class FrmCajero : FrmEmpleado
     {
-        private Cajero nuevoCajero;
+        private Cajero nuevoEmpleado;
 
         public FrmCajero()
         {
             InitializeComponent();
         }
 
-        public Cajero NuevoCajero { get { return this.nuevoCajero; } }
+        public FrmCajero(Cajero cajeroAModificar) : this()
+        {
+            base.EstablecerCamposComunes(cajeroAModificar);
+            this.txtPropina.Text = cajeroAModificar.PropinaActual.ToString();
+            this.EstablecerCaja(cajeroAModificar.CajaAsignada);
+        }
 
-        private void btnAceptar_ClickMesero(object sender, EventArgs e)
+        public override Cajero NuevoEmpleado { get { return this.nuevoEmpleado; } }
+
+        private void btnAceptar_ClickCajero(object sender, EventArgs e)
         {
             if (base.ComprobarCamposFormulario())
             {
                 ETurnos turnoElegido = base.ObtenerTurnoTrabajo();
                 int cajaAsignada = this.ObtenerCaja();
 
-                this.nuevoCajero = new Cajero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, int.Parse(this.txtPropina.Text), cajaAsignada);
+                this.nuevoEmpleado = new Cajero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, int.Parse(this.txtPropina.Text), cajaAsignada);
                 this.DialogResult = DialogResult.OK;
             }
         }
@@ -39,6 +46,11 @@ namespace WinFormsEmpleados
             int numeroCaja = this.rdoCajaUno.Checked ? numeroCaja = 1 : numeroCaja = 2;
 
             return numeroCaja;
+        }
+
+        private void EstablecerCaja(int cajaAsignada)
+        {
+            _ = cajaAsignada == 1 ? this.rdoCajaUno.Checked = true : this.rdoCajaDos.Checked = true;
         }
     }
 }

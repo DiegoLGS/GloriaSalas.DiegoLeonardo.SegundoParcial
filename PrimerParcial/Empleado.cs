@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PrimerParcial
-{
+{    
     public abstract class Empleado
     {
         protected string nombre;
@@ -55,17 +56,23 @@ namespace PrimerParcial
 
         public abstract void CambiarDisponibilidadHorasExtras();
 
-        public virtual string MostrarDatos()
+        public virtual string MostrarDatos(string titulo)
         {
             StringBuilder sb = new StringBuilder();
             string haceHorasExtra = this.disponibleHorasExtras ? "Si" : "No";
 
+            sb.AppendLine(titulo);
             sb.AppendLine($"Nombre: {this.nombre}");
             sb.AppendLine($"Legajo: {this.legajo}");
             sb.AppendLine($"Turno de trabajo: {this.turnoDeTrabajo}");            
             sb.AppendLine($"Disponible para horas extras: {haceHorasExtra}");
 
             return sb.ToString();
+        }
+
+        public virtual string MostrarDatos()
+        {
+            return $"{this.Nombre} - {this.Legajo} - {this.TurnoDeTrabajo}";
         }
 
         public override string ToString()

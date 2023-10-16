@@ -13,11 +13,22 @@ namespace WinFormsEmpleados
 {
     public partial class FrmEmpleado : Form
     {
+        protected Dictionary<ETurnos, RadioButton> radioButtons;
 
         public FrmEmpleado()
         {
             InitializeComponent();
+            radioButtons = new Dictionary<ETurnos, RadioButton>
+            {
+                { ETurnos.MañanaPartTime, this.rdoMañanaPartTime },
+                { ETurnos.MañanaFullTime, this.rdoMañanaFullTime },
+                { ETurnos.TardePartTime, this.rdoTardePartTime },
+                { ETurnos.TardeFullTime, this.rdoTardeFullTime },
+                { ETurnos.NochePartTime, this.rdoNochePartTime }
+            };
         }
+
+        public virtual Empleado NuevoEmpleado { get; }
 
         protected bool ComprobarCamposFormulario()
         {
@@ -54,20 +65,12 @@ namespace WinFormsEmpleados
         protected ETurnos ObtenerTurnoTrabajo()
         {
             ETurnos turnoElegido = ETurnos.MañanaPartTime;
-            Dictionary<RadioButton, ETurnos> radioButtons = new Dictionary<RadioButton, ETurnos>
-            {
-                { this.rdoMañanaPartTime, ETurnos.MañanaPartTime },
-                { this.rdoMañanaFullTime, ETurnos.MañanaFullTime },
-                { this.rdoTardePartTime, ETurnos.TardePartTime },
-                { this.rdoTardeFullTime, ETurnos.TardeFullTime },
-                { this.rdoNochePartTime, ETurnos.NochePartTime }
-            };
 
-            foreach (var par in radioButtons)
+            foreach (var par in this.radioButtons)
             {
-                if (par.Key.Checked)
+                if (par.Value.Checked)
                 {
-                    turnoElegido = par.Value;
+                    turnoElegido = par.Key;
                     break;
                 }
             }
@@ -75,22 +78,17 @@ namespace WinFormsEmpleados
             return turnoElegido;
         }
 
-        protected void EstablecerTurnoTrabajo(ETurnos turno)
+        protected void EstablecerCamposComunes(Empleado empleado)
         {
-            Dictionary<ETurnos, RadioButton> radioButtons = new Dictionary<ETurnos, RadioButton>
-            {
-                { ETurnos.MañanaPartTime, this.rdoMañanaPartTime },
-                { ETurnos.MañanaFullTime, this.rdoMañanaFullTime },
-                { ETurnos.TardePartTime, this.rdoTardePartTime },
-                { ETurnos.TardeFullTime, this.rdoTardeFullTime },
-                { ETurnos.NochePartTime, this.rdoNochePartTime }
-            };
+            this.txtNombre.Text = empleado.Nombre;
+            this.txtLegajo.Text = empleado.Legajo.ToString();            
 
-            foreach (var par in radioButtons)
+            foreach (var par in this.radioButtons)
             {
-                if (par.Key == turno)
+                if (par.Key == empleado.TurnoDeTrabajo)
                 {
                     par.Value.Checked = true;
+                    break;
                 }
             }
         }

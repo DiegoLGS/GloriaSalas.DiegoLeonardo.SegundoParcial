@@ -37,6 +37,10 @@
             grpCaja.SuspendLayout();
             SuspendLayout();
             // 
+            // btnAceptar
+            // 
+            btnAceptar.Click += btnAceptar_ClickCajero;
+            // 
             // txtPropina
             // 
             txtPropina.Location = new Point(46, 256);
