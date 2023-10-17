@@ -31,8 +31,6 @@ namespace WinFormsEmpleados
             this.CargarUsuarios();
         }
 
-
-
         private void CargarUsuarios()
         {
             string path = @"..\..\..\MOCK_DATA.json";
@@ -72,9 +70,14 @@ namespace WinFormsEmpleados
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+
+        private void FrmLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btnIngresar_Click(sender, e);
+                e.Handled = true;
+            }
         }
     }
 }

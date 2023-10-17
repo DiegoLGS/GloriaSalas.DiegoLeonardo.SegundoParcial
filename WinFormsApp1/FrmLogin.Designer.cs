@@ -89,9 +89,11 @@
             Controls.Add(lblPassword);
             Controls.Add(lblCorreo);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            KeyPreview = true;
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
+            KeyPress += FrmLogin_KeyPress;
             ResumeLayout(false);
             PerformLayout();
         }

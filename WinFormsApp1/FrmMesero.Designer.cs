@@ -45,7 +45,7 @@
             // lblNumeroDeMesas
             // 
             lblNumeroDeMesas.AutoSize = true;
-            lblNumeroDeMesas.Location = new Point(46, 282);
+            lblNumeroDeMesas.Location = new Point(53, 285);
             lblNumeroDeMesas.Name = "lblNumeroDeMesas";
             lblNumeroDeMesas.Size = new Size(158, 15);
             lblNumeroDeMesas.TabIndex = 9;
@@ -53,9 +53,9 @@
             // 
             // txtNumeroDeMesas
             // 
-            txtNumeroDeMesas.Location = new Point(52, 300);
+            txtNumeroDeMesas.Location = new Point(54, 303);
             txtNumeroDeMesas.Name = "txtNumeroDeMesas";
-            txtNumeroDeMesas.Size = new Size(239, 23);
+            txtNumeroDeMesas.Size = new Size(256, 23);
             txtNumeroDeMesas.TabIndex = 11;
             // 
             // grpZonaDeTrabajo
@@ -63,9 +63,9 @@
             grpZonaDeTrabajo.Controls.Add(rdoSegundoPiso);
             grpZonaDeTrabajo.Controls.Add(rdoPrincipal);
             grpZonaDeTrabajo.Controls.Add(rdoPatio);
-            grpZonaDeTrabajo.Location = new Point(46, 232);
+            grpZonaDeTrabajo.Location = new Point(53, 232);
             grpZonaDeTrabajo.Name = "grpZonaDeTrabajo";
-            grpZonaDeTrabajo.Size = new Size(259, 41);
+            grpZonaDeTrabajo.Size = new Size(257, 41);
             grpZonaDeTrabajo.TabIndex = 12;
             grpZonaDeTrabajo.TabStop = false;
             grpZonaDeTrabajo.Text = "Zona de trabajo";
@@ -107,7 +107,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(364, 450);
+            ClientSize = new Size(363, 437);
             Controls.Add(grpZonaDeTrabajo);
             Controls.Add(txtNumeroDeMesas);
             Controls.Add(lblNumeroDeMesas);

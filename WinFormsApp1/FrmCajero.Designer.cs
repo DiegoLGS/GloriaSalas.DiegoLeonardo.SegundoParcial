@@ -43,15 +43,15 @@
             // 
             // txtPropina
             // 
-            txtPropina.Location = new Point(46, 256);
+            txtPropina.Location = new Point(53, 256);
             txtPropina.Name = "txtPropina";
-            txtPropina.Size = new Size(245, 23);
+            txtPropina.Size = new Size(257, 23);
             txtPropina.TabIndex = 8;
             // 
             // lblPropina
             // 
             lblPropina.AutoSize = true;
-            lblPropina.Location = new Point(46, 238);
+            lblPropina.Location = new Point(54, 238);
             lblPropina.Name = "lblPropina";
             lblPropina.Size = new Size(83, 15);
             lblPropina.TabIndex = 9;
@@ -61,9 +61,9 @@
             // 
             grpCaja.Controls.Add(rdoCajaDos);
             grpCaja.Controls.Add(rdoCajaUno);
-            grpCaja.Location = new Point(50, 298);
+            grpCaja.Location = new Point(53, 296);
             grpCaja.Name = "grpCaja";
-            grpCaja.Size = new Size(241, 55);
+            grpCaja.Size = new Size(257, 55);
             grpCaja.TabIndex = 10;
             grpCaja.TabStop = false;
             grpCaja.Text = "Caja asignada";
@@ -71,7 +71,7 @@
             // rdoCajaDos
             // 
             rdoCajaDos.AutoSize = true;
-            rdoCajaDos.Location = new Point(129, 22);
+            rdoCajaDos.Location = new Point(145, 22);
             rdoCajaDos.Name = "rdoCajaDos";
             rdoCajaDos.Size = new Size(95, 19);
             rdoCajaDos.TabIndex = 1;
@@ -83,7 +83,7 @@
             // 
             rdoCajaUno.AutoSize = true;
             rdoCajaUno.Checked = true;
-            rdoCajaUno.Location = new Point(9, 22);
+            rdoCajaUno.Location = new Point(16, 22);
             rdoCajaUno.Name = "rdoCajaUno";
             rdoCajaUno.Size = new Size(114, 19);
             rdoCajaUno.TabIndex = 0;
@@ -95,7 +95,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(354, 450);
+            ClientSize = new Size(363, 437);
             Controls.Add(grpCaja);
             Controls.Add(lblPropina);
             Controls.Add(txtPropina);

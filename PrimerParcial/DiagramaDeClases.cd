@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PrimerParcial.Cajero">
+    <Position X="4.25" Y="3.75" Width="2.5" />
+    <InheritanceLine Type="PrimerParcial.Empleado" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.375" Y="5.199" />
+        <Point X="3.375" Y="6.77" />
+        <Point X="5.375" Y="6.77" />
+        <Point X="5.375" Y="6.655" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AEAQAABgAAAAIAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cajero.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.Cocinero">
+    <Position X="9.75" Y="3.75" Width="2.5" />
+    <InheritanceLine Type="PrimerParcial.Empleado" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.625" Y="5.199" />
+        <Point X="1.625" Y="5.786" />
+        <Point X="1.615" Y="5.786" />
+        <Point X="1.615" Y="6.979" />
+        <Point X="10.562" Y="6.979" />
+        <Point X="10.562" Y="6.655" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAEQAAAAAAAAAAAAoAAAACAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Cocinero.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.Empleado">
+    <Position X="1.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQIAAAAAAAgAiEgIAAhAAgAAQAAAAAAABAAAAAAiA=</HashCode>
+      <FileName>Empleado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.ListadoEmpleados">
+    <Position X="7" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAQAEAAAAACAAAAAAAAAAAAAAAAiQ=</HashCode>
+      <FileName>ListadoEmpleados.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.Mesero">
+    <Position X="7" Y="3.75" Width="2.5" />
+    <InheritanceLine Type="PrimerParcial.Empleado" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="5.199" />
+        <Point X="2.5" Y="6.854" />
+        <Point X="8.25" Y="6.854" />
+        <Point X="8.25" Y="6.655" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AQAQAAAAAAAAAAAAgIAAAAAAAAABAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Mesero.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.Usuario">
+    <Position X="9.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAQBAACMAAAAAAAAAAQAAACACAAQAAAAAAA=</HashCode>
+      <FileName>Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ETurnos">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAQCAAAAIAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enumerados.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

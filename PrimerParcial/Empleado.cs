@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace PrimerParcial
 {    
     public abstract class Empleado
@@ -13,7 +12,7 @@ namespace PrimerParcial
         protected int legajo;
         protected ETurnos turnoDeTrabajo;
         protected bool disponibleHorasExtras;
-
+        
         private Empleado(string nombre)
         {
             this.nombre = nombre;
@@ -62,15 +61,15 @@ namespace PrimerParcial
             string haceHorasExtra = this.disponibleHorasExtras ? "Si" : "No";
 
             sb.AppendLine(titulo);
-            sb.AppendLine($"Nombre: {this.nombre}");
-            sb.AppendLine($"Legajo: {this.legajo}");
-            sb.AppendLine($"Turno de trabajo: {this.turnoDeTrabajo}");            
+            sb.AppendLine($"Nombre: {this.Nombre}");
+            sb.AppendLine($"Legajo: {this.Legajo}");
+            sb.AppendLine($"Turno de trabajo: {this.TurnoDeTrabajo}");            
             sb.AppendLine($"Disponible para horas extras: {haceHorasExtra}");
 
             return sb.ToString();
         }
 
-        public virtual string MostrarDatos()
+        protected virtual string MostrarDatos()
         {
             return $"{this.Nombre} - {this.Legajo} - {this.TurnoDeTrabajo}";
         }

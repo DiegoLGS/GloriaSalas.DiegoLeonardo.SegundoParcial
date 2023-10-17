@@ -32,14 +32,12 @@ namespace WinFormsEmpleados
 
         public override Cocinero NuevoEmpleado { get { return this.nuevoEmpleado; } }
 
-        public FrmCocinero(Cocinero cocineroAModificar):this()
-        {            
+        public FrmCocinero(Cocinero cocineroAModificar) : this()
+        {
             base.EstablecerCamposComunes(cocineroAModificar);
             this.EstablecerEspecialidades(cocineroAModificar.Especialidad);
             this.txtCertificacion.Text = cocineroAModificar.Certificacion;
         }
-
-        public Cocinero NuevoCocinero { get { return this.nuevoEmpleado; } }
 
         private void btnAceptar_ClickCocinero(object sender, EventArgs e)
         {
@@ -51,8 +49,16 @@ namespace WinFormsEmpleados
                 this.nuevoEmpleado = new Cocinero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, especialidades, this.txtCertificacion.Text);
                 this.DialogResult = DialogResult.OK;
             }
+            else
+            {
+                MessageBox.Show("Verifique que los campos no esten vacíos y los datos ingresados sean los correctos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
+        /// <summary>
+        /// ObtenerEspecialidades() itera sobre el diccionario que relaciona las especialidades del cocinero con los Checkboxs correspondientes
+        /// </summary>
+        /// <returns>Regresa un string con todas las especialidades marcadas</returns>
         protected string ObtenerEspecialidades()
         {
             string especialidadesSeleccionadas = "";
@@ -61,14 +67,18 @@ namespace WinFormsEmpleados
             {
                 if (par.Value.Checked)
                 {
-                    especialidadesSeleccionadas += par.Key + "\n";
+                    especialidadesSeleccionadas += "\n" + par.Key;
                 }
             }
 
             return especialidadesSeleccionadas;
         }
 
-
+        /// <summary>
+        /// EstablecerEspecialidades() itera sobre el diccionario que relaciona las especialidades del cocinero con los Checkboxs correspondientes
+        /// y marca los que han sido asignados al Cocinero.
+        /// </summary>
+        /// <param name="especialidades">Recibe la cadena completa de especialidades</param>
         private void EstablecerEspecialidades(string especialidades)
         {
             string[] lineas = especialidades.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);

@@ -34,7 +34,7 @@ namespace PrimerParcial
         {
             bool respuesta = false;
 
-            if (lista != empleado)
+            if(lista != empleado)
             {
                 lista.listaDeEmpleados.Add(empleado);
                 respuesta = true;
@@ -46,7 +46,7 @@ namespace PrimerParcial
         {
             bool respuesta = false;
 
-            if (lista == empleado)
+            if(lista == empleado)
             {
                 lista.listaDeEmpleados.Remove(empleado);
                 respuesta = true;

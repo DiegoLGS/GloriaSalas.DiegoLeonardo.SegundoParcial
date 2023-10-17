@@ -46,7 +46,7 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(46, 9);
+            lblNombre.Location = new Point(53, 9);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(51, 15);
             lblNombre.TabIndex = 0;
@@ -55,7 +55,7 @@
             // lblLegajo
             // 
             lblLegajo.AutoSize = true;
-            lblLegajo.Location = new Point(46, 65);
+            lblLegajo.Location = new Point(53, 65);
             lblLegajo.Name = "lblLegajo";
             lblLegajo.Size = new Size(42, 15);
             lblLegajo.TabIndex = 1;
@@ -63,17 +63,16 @@
             // 
             // btnAceptar
             // 
-            btnAceptar.Location = new Point(81, 378);
+            btnAceptar.Location = new Point(82, 378);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(84, 47);
             btnAceptar.TabIndex = 3;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = true;
-            btnAceptar.Click += btnAceptar_Click;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(179, 378);
+            btnCancelar.Location = new Point(180, 378);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(84, 47);
             btnCancelar.TabIndex = 4;
@@ -83,16 +82,16 @@
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(46, 27);
+            txtNombre.Location = new Point(53, 27);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(245, 23);
+            txtNombre.Size = new Size(257, 23);
             txtNombre.TabIndex = 5;
             // 
             // txtLegajo
             // 
-            txtLegajo.Location = new Point(46, 83);
+            txtLegajo.Location = new Point(53, 83);
             txtLegajo.Name = "txtLegajo";
-            txtLegajo.Size = new Size(245, 23);
+            txtLegajo.Size = new Size(257, 23);
             txtLegajo.TabIndex = 6;
             // 
             // grpTurnoDeTrabajo
@@ -102,7 +101,7 @@
             grpTurnoDeTrabajo.Controls.Add(rdoMañanaFullTime);
             grpTurnoDeTrabajo.Controls.Add(rdoMañanaPartTime);
             grpTurnoDeTrabajo.Controls.Add(rdoTardeFullTime);
-            grpTurnoDeTrabajo.Location = new Point(46, 126);
+            grpTurnoDeTrabajo.Location = new Point(54, 126);
             grpTurnoDeTrabajo.Name = "grpTurnoDeTrabajo";
             grpTurnoDeTrabajo.Size = new Size(256, 100);
             grpTurnoDeTrabajo.TabIndex = 7;
@@ -173,6 +172,7 @@
             Controls.Add(btnAceptar);
             Controls.Add(lblLegajo);
             Controls.Add(lblNombre);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FrmEmpleado";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FrmEmpleado";

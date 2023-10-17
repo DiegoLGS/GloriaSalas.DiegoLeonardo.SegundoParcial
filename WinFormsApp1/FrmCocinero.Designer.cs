@@ -53,9 +53,9 @@
             groupBox1.Controls.Add(cbParrilla);
             groupBox1.Controls.Add(cbVegana);
             groupBox1.Controls.Add(cbReposteria);
-            groupBox1.Location = new Point(46, 232);
+            groupBox1.Location = new Point(53, 232);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(252, 70);
+            groupBox1.Size = new Size(257, 70);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             groupBox1.Text = "Especialidad del cocinero";
@@ -131,16 +131,16 @@
             // 
             // txtCertificacion
             // 
-            txtCertificacion.Location = new Point(46, 323);
+            txtCertificacion.Location = new Point(53, 323);
             txtCertificacion.Name = "txtCertificacion";
-            txtCertificacion.Size = new Size(245, 23);
+            txtCertificacion.Size = new Size(257, 23);
             txtCertificacion.TabIndex = 10;
             // 
             // FrmCocinero
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(347, 450);
+            ClientSize = new Size(363, 437);
             Controls.Add(txtCertificacion);
             Controls.Add(lblCertificacion);
             Controls.Add(groupBox1);

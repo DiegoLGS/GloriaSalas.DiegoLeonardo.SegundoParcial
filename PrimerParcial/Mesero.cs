@@ -40,7 +40,6 @@ namespace PrimerParcial
         public override void CambiarDisponibilidadHorasExtras()
         {
             this.disponibleHorasExtras = !this.disponibleHorasExtras;
-            Console.WriteLine("Disponibilidad para hacer horas extras cambiada");
         }
 
         public override string MostrarDatos(string titulo)

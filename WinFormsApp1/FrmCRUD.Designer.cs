@@ -45,6 +45,7 @@
             rdoAscendente = new RadioButton();
             rdoDescendente = new RadioButton();
             btnOrdenarLista = new Button();
+            btnCambiarHorasExtra = new Button();
             grpParametro.SuspendLayout();
             grpOrden.SuspendLayout();
             SuspendLayout();
@@ -55,22 +56,22 @@
             lstEmpleados.ItemHeight = 15;
             lstEmpleados.Location = new Point(35, 49);
             lstEmpleados.Name = "lstEmpleados";
-            lstEmpleados.Size = new Size(261, 304);
+            lstEmpleados.Size = new Size(392, 304);
             lstEmpleados.TabIndex = 0;
             // 
             // btnAgregarMesero
             // 
-            btnAgregarMesero.Location = new Point(319, 49);
+            btnAgregarMesero.Location = new Point(445, 49);
             btnAgregarMesero.Name = "btnAgregarMesero";
             btnAgregarMesero.Size = new Size(117, 29);
             btnAgregarMesero.TabIndex = 1;
             btnAgregarMesero.Text = "Agregar Mesero";
             btnAgregarMesero.UseVisualStyleBackColor = true;
-            btnAgregarMesero.Click += btnAgregarMesero_Click;
+            btnAgregarMesero.Click += btnAgregarEmpleado_Click;
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(319, 154);
+            btnModificar.Location = new Point(445, 154);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(117, 29);
             btnModificar.TabIndex = 2;
@@ -80,7 +81,7 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.Location = new Point(319, 189);
+            btnEliminar.Location = new Point(445, 189);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(117, 29);
             btnEliminar.TabIndex = 3;
@@ -99,27 +100,27 @@
             // 
             // btnAgregarCocinero
             // 
-            btnAgregarCocinero.Location = new Point(319, 84);
+            btnAgregarCocinero.Location = new Point(445, 84);
             btnAgregarCocinero.Name = "btnAgregarCocinero";
             btnAgregarCocinero.Size = new Size(117, 29);
             btnAgregarCocinero.TabIndex = 5;
             btnAgregarCocinero.Text = "Agregar Cocinero";
             btnAgregarCocinero.UseVisualStyleBackColor = true;
-            btnAgregarCocinero.Click += btnAgregarCocinero_Click;
+            btnAgregarCocinero.Click += btnAgregarEmpleado_Click;
             // 
             // btnAgregarCajero
             // 
-            btnAgregarCajero.Location = new Point(319, 119);
+            btnAgregarCajero.Location = new Point(445, 119);
             btnAgregarCajero.Name = "btnAgregarCajero";
             btnAgregarCajero.Size = new Size(117, 29);
             btnAgregarCajero.TabIndex = 6;
             btnAgregarCajero.Text = "Agregar Cajero";
             btnAgregarCajero.UseVisualStyleBackColor = true;
-            btnAgregarCajero.Click += btnAgregarCajero_Click;
+            btnAgregarCajero.Click += btnAgregarEmpleado_Click;
             // 
             // btnInformacionDetallada
             // 
-            btnInformacionDetallada.Location = new Point(319, 250);
+            btnInformacionDetallada.Location = new Point(445, 311);
             btnInformacionDetallada.Name = "btnInformacionDetallada";
             btnInformacionDetallada.Size = new Size(117, 42);
             btnInformacionDetallada.TabIndex = 7;
@@ -130,7 +131,7 @@
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.Location = new Point(200, 505);
+            lblUsuario.Location = new Point(276, 470);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(47, 15);
             lblUsuario.TabIndex = 8;
@@ -223,11 +224,22 @@
             btnOrdenarLista.UseVisualStyleBackColor = true;
             btnOrdenarLista.Click += btnOrdenarLista_Click;
             // 
+            // btnCambiarHorasExtra
+            // 
+            btnCambiarHorasExtra.Location = new Point(445, 263);
+            btnCambiarHorasExtra.Name = "btnCambiarHorasExtra";
+            btnCambiarHorasExtra.Size = new Size(117, 42);
+            btnCambiarHorasExtra.TabIndex = 13;
+            btnCambiarHorasExtra.Text = "Cambiar disp. horas extras";
+            btnCambiarHorasExtra.UseVisualStyleBackColor = true;
+            btnCambiarHorasExtra.Click += btnCambiarHorasExtra_Click;
+            // 
             // FrmCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(471, 529);
+            ClientSize = new Size(578, 494);
+            Controls.Add(btnCambiarHorasExtra);
             Controls.Add(btnOrdenarLista);
             Controls.Add(grpOrden);
             Controls.Add(grpParametro);
@@ -241,6 +253,7 @@
             Controls.Add(btnModificar);
             Controls.Add(btnAgregarMesero);
             Controls.Add(lstEmpleados);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "FrmCRUD";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
@@ -273,5 +286,6 @@
         private RadioButton rdoDescendente;
         private RadioButton rdoPorLegajo;
         private Button btnOrdenarLista;
+        private Button btnCambiarHorasExtra;
     }
 }

@@ -20,24 +20,28 @@ namespace WinFormsEmpleados
             InitializeComponent();
         }
 
-        public FrmMesero(Mesero meseroAModificar):this()
-        {            
+        public FrmMesero(Mesero meseroAModificar) : this()
+        {
             base.EstablecerCamposComunes(meseroAModificar);
             this.EstablecerZonaAtencion(meseroAModificar.ZonaDeAtencion);
-            this.txtNumeroDeMesas.Text = meseroAModificar.NumeroDeMesas.ToString();            
+            this.txtNumeroDeMesas.Text = meseroAModificar.NumeroDeMesas.ToString();
         }
 
         public override Mesero NuevoEmpleado { get { return this.nuevoEmpleado; } }
 
         private void btnAceptar_ClickMesero(object sender, EventArgs e)
         {
-            if (base.ComprobarCamposFormulario())
+            if (base.ComprobarCamposFormulario() && base.ComprobarValoresNumericos(this.txtNumeroDeMesas.Text))
             {
                 ETurnos turnoElegido = base.ObtenerTurnoTrabajo();
                 string zonaDeTrabajo = this.ObtenerZonaAtencion();
 
                 this.nuevoEmpleado = new Mesero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, zonaDeTrabajo, int.Parse(this.txtNumeroDeMesas.Text));
-                this.DialogResult = DialogResult.OK;
+                this.DialogResult = DialogResult.OK;                
+            }
+            else
+            {
+                MessageBox.Show("Verifique que los campos no esten vacíos y los datos ingresados sean los correctos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -76,5 +80,6 @@ namespace WinFormsEmpleados
                 this.rdoSegundoPiso.Checked = true;
             }
         }
+
     }
 }
