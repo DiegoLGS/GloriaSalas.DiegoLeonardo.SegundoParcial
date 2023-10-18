@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PrimerParcial
 {
+    /// <summary>
+    /// Cajero obtiene características de la clase abstracta Empleado, agrega propinaActual(int) y cajaAsignada(int)
+    /// que corresponde a sus características exclusivas.
+    /// </summary>
     public class Cajero : Empleado
     {
         private int propinaActual;
@@ -51,6 +55,11 @@ namespace PrimerParcial
             sb.AppendLine($"Caja asignada: {this.cajaAsignada}");
 
             return sb.ToString();
+        }
+
+        public override string MostrarDatos()
+        {
+            return "Cajero: " + base.MostrarDatos();
         }
     }
 }

@@ -40,7 +40,40 @@
             // 
             // btnAceptar
             // 
+            btnAceptar.TabIndex = 11;
             btnAceptar.Click += btnAceptar_ClickMesero;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.TabIndex = 12;
+            // 
+            // txtNombre
+            // 
+            txtNombre.TabIndex = 0;
+            // 
+            // txtLegajo
+            // 
+            txtLegajo.TabIndex = 1;
+            // 
+            // rdoNochePartTime
+            // 
+            rdoNochePartTime.TabIndex = 6;
+            // 
+            // rdoTardePartTime
+            // 
+            rdoTardePartTime.TabIndex = 4;
+            // 
+            // rdoMañanaFullTime
+            // 
+            rdoMañanaFullTime.TabIndex = 3;
+            // 
+            // rdoMañanaPartTime
+            // 
+            rdoMañanaPartTime.TabIndex = 2;
+            // 
+            // rdoTardeFullTime
+            // 
+            rdoTardeFullTime.TabIndex = 5;
             // 
             // lblNumeroDeMesas
             // 
@@ -56,7 +89,7 @@
             txtNumeroDeMesas.Location = new Point(54, 303);
             txtNumeroDeMesas.Name = "txtNumeroDeMesas";
             txtNumeroDeMesas.Size = new Size(256, 23);
-            txtNumeroDeMesas.TabIndex = 11;
+            txtNumeroDeMesas.TabIndex = 10;
             // 
             // grpZonaDeTrabajo
             // 
@@ -76,7 +109,7 @@
             rdoSegundoPiso.Location = new Point(141, 16);
             rdoSegundoPiso.Name = "rdoSegundoPiso";
             rdoSegundoPiso.Size = new Size(97, 19);
-            rdoSegundoPiso.TabIndex = 2;
+            rdoSegundoPiso.TabIndex = 9;
             rdoSegundoPiso.Text = "Segundo piso";
             rdoSegundoPiso.UseVisualStyleBackColor = true;
             // 
@@ -87,7 +120,7 @@
             rdoPrincipal.Location = new Point(6, 16);
             rdoPrincipal.Name = "rdoPrincipal";
             rdoPrincipal.Size = new Size(71, 19);
-            rdoPrincipal.TabIndex = 1;
+            rdoPrincipal.TabIndex = 7;
             rdoPrincipal.TabStop = true;
             rdoPrincipal.Text = "Principal";
             rdoPrincipal.UseVisualStyleBackColor = true;
@@ -98,7 +131,7 @@
             rdoPatio.Location = new Point(83, 16);
             rdoPatio.Name = "rdoPatio";
             rdoPatio.Size = new Size(52, 19);
-            rdoPatio.TabIndex = 0;
+            rdoPatio.TabIndex = 8;
             rdoPatio.TabStop = true;
             rdoPatio.Text = "Patio";
             rdoPatio.UseVisualStyleBackColor = true;
@@ -112,7 +145,7 @@
             Controls.Add(txtNumeroDeMesas);
             Controls.Add(lblNumeroDeMesas);
             Name = "FrmMesero";
-            Text = "FrmMesero";
+            Text = "Nuevo Mesero";
             Controls.SetChildIndex(btnAceptar, 0);
             Controls.SetChildIndex(btnCancelar, 0);
             Controls.SetChildIndex(txtNombre, 0);

@@ -45,19 +45,39 @@ namespace WinFormsEmpleados
                 if (item is TextBox & item.Text == String.Empty)
                 {
                     datosCargados = false;
+                    MessageBox.Show("Verifique que los campos no esten vacíos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                     break;
                 }
             }
 
-            datosCargados = ComprobarValoresNumericos(this.txtLegajo.Text);
+            datosCargados = ComprobarValoresNumericos(this.txtLegajo.Text, 5);
 
             return datosCargados;
         }
 
-        protected bool ComprobarValoresNumericos(string texto)
+        protected bool ComprobarValoresNumericos(string texto, int cantidadMaxCaracteres)
         {
-            return Regex.IsMatch(texto, @"^[0-9]+$");
-        }       
+            bool resultado = false;
+
+            if (texto.Length <= cantidadMaxCaracteres)
+            {
+                if (!Regex.IsMatch(texto, @"^[0-9]+$"))
+                {
+                    MessageBox.Show($"Verifique que los campos numéricos no contengan letras ni signos: {texto}", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    resultado = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show($"El valor ingresado '{texto}' no puedo superar los {cantidadMaxCaracteres} caracteres.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return resultado;
+        }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {

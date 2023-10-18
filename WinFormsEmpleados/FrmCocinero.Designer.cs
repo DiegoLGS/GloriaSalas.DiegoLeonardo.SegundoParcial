@@ -43,7 +43,40 @@
             // 
             // btnAceptar
             // 
+            btnAceptar.TabIndex = 14;
             btnAceptar.Click += btnAceptar_ClickCocinero;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.TabIndex = 15;
+            // 
+            // txtNombre
+            // 
+            txtNombre.TabIndex = 0;
+            // 
+            // txtLegajo
+            // 
+            txtLegajo.TabIndex = 1;
+            // 
+            // rdoNochePartTime
+            // 
+            rdoNochePartTime.TabIndex = 6;
+            // 
+            // rdoTardePartTime
+            // 
+            rdoTardePartTime.TabIndex = 4;
+            // 
+            // rdoMañanaFullTime
+            // 
+            rdoMañanaFullTime.TabIndex = 3;
+            // 
+            // rdoMañanaPartTime
+            // 
+            rdoMañanaPartTime.TabIndex = 2;
+            // 
+            // rdoTardeFullTime
+            // 
+            rdoTardeFullTime.TabIndex = 5;
             // 
             // groupBox1
             // 
@@ -66,7 +99,7 @@
             cbPescados.Location = new Point(160, 47);
             cbPescados.Name = "cbPescados";
             cbPescados.Size = new Size(75, 19);
-            cbPescados.TabIndex = 5;
+            cbPescados.TabIndex = 12;
             cbPescados.Text = "Pescados";
             cbPescados.UseVisualStyleBackColor = true;
             // 
@@ -76,7 +109,7 @@
             cbGourmet.Location = new Point(160, 22);
             cbGourmet.Name = "cbGourmet";
             cbGourmet.Size = new Size(73, 19);
-            cbGourmet.TabIndex = 4;
+            cbGourmet.TabIndex = 9;
             cbGourmet.Text = "Gourmet";
             cbGourmet.UseVisualStyleBackColor = true;
             // 
@@ -86,7 +119,7 @@
             cbPastas.Location = new Point(92, 47);
             cbPastas.Name = "cbPastas";
             cbPastas.Size = new Size(59, 19);
-            cbPastas.TabIndex = 3;
+            cbPastas.TabIndex = 11;
             cbPastas.Text = "Pastas";
             cbPastas.UseVisualStyleBackColor = true;
             // 
@@ -96,7 +129,7 @@
             cbParrilla.Location = new Point(92, 22);
             cbParrilla.Name = "cbParrilla";
             cbParrilla.Size = new Size(62, 19);
-            cbParrilla.TabIndex = 2;
+            cbParrilla.TabIndex = 8;
             cbParrilla.Text = "Parrilla";
             cbParrilla.UseVisualStyleBackColor = true;
             // 
@@ -106,7 +139,7 @@
             cbVegana.Location = new Point(6, 47);
             cbVegana.Name = "cbVegana";
             cbVegana.Size = new Size(64, 19);
-            cbVegana.TabIndex = 1;
+            cbVegana.TabIndex = 10;
             cbVegana.Text = "Vegana";
             cbVegana.UseVisualStyleBackColor = true;
             // 
@@ -116,7 +149,7 @@
             cbReposteria.Location = new Point(6, 22);
             cbReposteria.Name = "cbReposteria";
             cbReposteria.Size = new Size(81, 19);
-            cbReposteria.TabIndex = 0;
+            cbReposteria.TabIndex = 7;
             cbReposteria.Text = "Reposteria";
             cbReposteria.UseVisualStyleBackColor = true;
             // 
@@ -134,7 +167,7 @@
             txtCertificacion.Location = new Point(53, 323);
             txtCertificacion.Name = "txtCertificacion";
             txtCertificacion.Size = new Size(257, 23);
-            txtCertificacion.TabIndex = 10;
+            txtCertificacion.TabIndex = 13;
             // 
             // FrmCocinero
             // 
@@ -145,7 +178,7 @@
             Controls.Add(lblCertificacion);
             Controls.Add(groupBox1);
             Name = "FrmCocinero";
-            Text = "FrmCocinero";
+            Text = "Nuevo Cocinero";
             Controls.SetChildIndex(btnAceptar, 0);
             Controls.SetChildIndex(btnCancelar, 0);
             Controls.SetChildIndex(txtNombre, 0);

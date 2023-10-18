@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PrimerParcial
 {    
+    /// <summary>
+    /// Empleado es una clase que sirve como base para sus tres derivados, reuniendo atributos y métodos comunes entre ellos.
+    /// </summary>
     public abstract class Empleado
     {
         protected string nombre;
@@ -69,7 +72,7 @@ namespace PrimerParcial
             return sb.ToString();
         }
 
-        protected virtual string MostrarDatos()
+        public virtual string MostrarDatos()
         {
             return $"{this.Nombre} - {this.Legajo} - {this.TurnoDeTrabajo}";
         }

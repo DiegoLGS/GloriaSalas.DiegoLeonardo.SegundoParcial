@@ -58,7 +58,7 @@
             txtCorreo.Location = new Point(12, 27);
             txtCorreo.Name = "txtCorreo";
             txtCorreo.Size = new Size(214, 23);
-            txtCorreo.TabIndex = 2;
+            txtCorreo.TabIndex = 0;
             // 
             // txtPassword
             // 
@@ -66,14 +66,14 @@
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(214, 23);
-            txtPassword.TabIndex = 3;
+            txtPassword.TabIndex = 1;
             // 
             // btnIngresar
             // 
             btnIngresar.Location = new Point(151, 118);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(75, 23);
-            btnIngresar.TabIndex = 4;
+            btnIngresar.TabIndex = 2;
             btnIngresar.Text = "Ingresar";
             btnIngresar.UseVisualStyleBackColor = true;
             btnIngresar.Click += btnIngresar_Click;

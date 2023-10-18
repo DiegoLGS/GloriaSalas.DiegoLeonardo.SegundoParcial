@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PrimerParcial
 {
+    /// <summary>
+    /// Mesero obtiene características de la clase abstracta Empleado, agrega zonaDeAtención(string) y numeroDeMesas(int)
+    /// que corresponde a sus características exclusivas.
+    /// </summary>
     public class Mesero : Empleado
     {
         private string zonaDeAtencion;
@@ -51,6 +55,11 @@ namespace PrimerParcial
             sb.AppendLine($"Número de mesas: {this.numeroDeMesas}");
 
             return sb.ToString();
+        }
+
+        public override string MostrarDatos()
+        {
+            return "Mesero: " + base.MostrarDatos();
         }
     }
 }

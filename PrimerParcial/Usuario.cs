@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PrimerParcial
 {
+    /// <summary>
+    /// Usuario almacena los datos del usuario logeado en la aplicación, puede mostrarlos junto con la fecha o fecha y hora
+    /// del momento del ingreso.
+    /// </summary>
     public class Usuario
     {
         public string apellido { get; set; }
@@ -44,7 +48,7 @@ namespace PrimerParcial
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("---------------------------------");
+            sb.AppendLine("---------------------------------------");
             sb.AppendLine($"Apellido: {this.apellido}");
             sb.AppendLine($"Nombre: {this.nombre}");
             sb.AppendLine($"Legajo: {this.legajo}");
@@ -52,7 +56,7 @@ namespace PrimerParcial
             sb.AppendLine($"Clave: {this.clave}");
             sb.AppendLine($"Perfil: {this.perfil}");
             sb.AppendLine($"Fecha y hora: {this.ObtenerFechaYHoraActual()}");
-            sb.AppendLine("---------------------------------");
+            sb.AppendLine("---------------------------------------");
 
             return sb.ToString();
         }

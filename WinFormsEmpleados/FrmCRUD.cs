@@ -1,6 +1,8 @@
 using Microsoft.VisualBasic.Devices;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PrimerParcial;
+using System;
 using System.Text.Json;
 using WinFormsEmpleados;
 
@@ -17,7 +19,7 @@ namespace WinFormsApp1
             this.empleadosActuales = new ListadoEmpleados();
             this.usuarioLogeado = usuarioLogeado;
             this.lblUsuario.Text = this.usuarioLogeado.ToString();
-        }             
+        }
 
         private void ActualizarLista()
         {
@@ -49,17 +51,34 @@ namespace WinFormsApp1
                 formEmpleado = new FrmCajero();
             }
 
-            if (formEmpleado != null && formEmpleado.ShowDialog() == DialogResult.OK)
+            while (true)
             {
-                AgregarEmpleado(formEmpleado.NuevoEmpleado);
+                formEmpleado.ShowDialog();
+
+                if (formEmpleado.DialogResult == DialogResult.OK)
+                {
+                    if (this.AgregarEmpleado(formEmpleado.NuevoEmpleado))
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
-        private void AgregarEmpleado(Empleado empleadoAgregado)
+        /// <summary>
+        /// AgregarEmpleado() Comprueba que el empleado no exista ya en la lista, y de ser así, lo agrega, caso contrario muestra
+        /// un cartel informando que se encontró una coincidencia.
+        /// </summary>
+        /// <param name="empleadoParaAgregar">Empleado que se desea agregar a al lista</param>
+        private bool AgregarEmpleado(Empleado empleadoParaAgregar)
         {
-            bool respuesta = this.empleadosActuales + empleadoAgregado;
+            bool respuesta = this.empleadosActuales + empleadoParaAgregar;
 
-            if(respuesta)
+            if (respuesta)
             {
                 this.ActualizarLista();
             }
@@ -67,6 +86,8 @@ namespace WinFormsApp1
             {
                 MessageBox.Show("El empleado que intentó ingresar ya existe en la lista de empleados.", "No se agregó el empleado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+
+            return respuesta;
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -78,13 +99,20 @@ namespace WinFormsApp1
                 return;
             }
 
-            this.empleadosActuales.listaDeEmpleados.RemoveAt(indice);
-            this.ActualizarLista();
+            Empleado empleadoAEliminar = this.empleadosActuales.listaDeEmpleados[indice];
+            bool eliminado = this.empleadosActuales - empleadoAEliminar;
+
+            if (eliminado)
+            {
+                this.ActualizarLista();
+            }
+
         }
 
         /// <summary>
-        /// btnModificar_Click() toma el item seleccionado (empleado) y crea una instancia de un formulario de creación tomando los datos
-        /// del empleado y volcandolos sobre él. Dependiendo del tipo de empleado crea un formulario diferente según sus especificaciones.
+        /// btnModificar_Click() toma el item seleccionado y crea una instancia de un formulario de creación tomando los datos
+        /// del empleado y volcandolos sobre él. Dependiendo del tipo de empleado crea un formulario diferente según sus especificaciones
+        /// .
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -113,12 +141,31 @@ namespace WinFormsApp1
                 frmEmpleadoSeleccionado = new FrmCajero((Cajero)empleadoSeleccionado);
             }
 
-            frmEmpleadoSeleccionado.ShowDialog();
-
-            if (frmEmpleadoSeleccionado.DialogResult == DialogResult.OK)
+            while (true)
             {
-                this.empleadosActuales.listaDeEmpleados[indice] = frmEmpleadoSeleccionado.NuevoEmpleado;
-                this.ActualizarLista();
+                frmEmpleadoSeleccionado.ShowDialog();
+
+                if (frmEmpleadoSeleccionado.DialogResult == DialogResult.OK)
+                {
+                    bool coincidencia = false;
+
+                    coincidencia = ListadoEmpleados.ComprobarCoindicencia(this.empleadosActuales, frmEmpleadoSeleccionado.NuevoEmpleado, indice);
+
+                    if (coincidencia)
+                    {
+                        MessageBox.Show("Los datos ingresados coinciden con los que ya tiene un empleado, vuelvalo a intentar.", "Error al modificar al empleado.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        this.empleadosActuales.listaDeEmpleados[indice] = frmEmpleadoSeleccionado.NuevoEmpleado;
+                        this.ActualizarLista();
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
             }
         }
 
@@ -130,38 +177,42 @@ namespace WinFormsApp1
         /// <param name="e"></param>
         private void FrmCRUD_Load(object sender, EventArgs e)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            GuardarLogUsuarios(path);
+            string path = @"..\..\..\";
+            this.GuardarLogUsuarios(path);
             path += @"\Listado_Empleados.json";
 
+            this.DeserializarJson(path);
+        }
+
+        private void DeserializarJson(string path)
+        {
             if (File.Exists(path))
-            {               
+            {
+                this.empleadosActuales.listaDeEmpleados.Clear();
                 string json = File.ReadAllText(path);
-                List<object> listaObjetos = JsonConvert.DeserializeObject<List<object>>(json);
+                List<JObject> listaObjetos = JsonConvert.DeserializeObject<List<JObject>>(json);
 
                 foreach (var empleado in listaObjetos)
                 {
-                    if (empleado.ToString().Contains("ZonaDeAtencion"))
+                    if (empleado["ZonaDeAtencion"] != null)
                     {
-                        Mesero nuevoEmpleado = JsonConvert.DeserializeObject<Mesero>(empleado.ToString());
-                        this.empleadosActuales.listaDeEmpleados.Add(nuevoEmpleado);
+                        Mesero mesero = empleado.ToObject<Mesero>();
+                        this.empleadosActuales.listaDeEmpleados.Add(mesero);
                     }
-                    else if (empleado.ToString().Contains("Especialidad"))
+                    else if (empleado["Especialidad"] != null)
                     {
-                        Cocinero nuevoEmpleado = JsonConvert.DeserializeObject<Cocinero>(empleado.ToString());
-                        this.empleadosActuales.listaDeEmpleados.Add(nuevoEmpleado);
+                        Cocinero cocinero = empleado.ToObject<Cocinero>();
+                        this.empleadosActuales.listaDeEmpleados.Add(cocinero);
                     }
-                    else
+                    else if (empleado["CajaAsignada"] != null)
                     {
-                        Cajero nuevoEmpleado = JsonConvert.DeserializeObject<Cajero>(empleado.ToString());
-                        this.empleadosActuales.listaDeEmpleados.Add(nuevoEmpleado);
+                        Cajero cajero = empleado.ToObject<Cajero>();
+                        this.empleadosActuales.listaDeEmpleados.Add(cajero);
                     }
                 }
-                
                 this.ActualizarLista();
             }
         }
-
 
         /// <summary>
         /// FrmCRUD_FormClosing() guarda la lista de empleados en un .json para mantener su almacenamiento fuera del funcionamiento del programa.
@@ -172,12 +223,15 @@ namespace WinFormsApp1
         {
             if (MessageBox.Show("¿Desea salir de la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo) == DialogResult.No)
             {
-                e.Cancel = true; 
+                e.Cancel = true;
             }
 
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            path += @"\Listado_Empleados.json";
+            string path = @"..\..\..\Listado_Empleados.json";
+            this.SerializarJson(path);
+        }
 
+        private void SerializarJson(string path)
+        {
             string json = JsonConvert.SerializeObject(this.empleadosActuales.listaDeEmpleados, Formatting.Indented);
             File.WriteAllText(path, json);
         }
@@ -222,7 +276,6 @@ namespace WinFormsApp1
             this.ActualizarLista();
         }
 
-
         /// <summary>
         /// btnCambiarHorasExtra_Click() alterna el booleano del empleado seleccionado a la vez que genera un texto informativo del estado nuevo.
         /// </summary>
@@ -243,5 +296,34 @@ namespace WinFormsApp1
             MessageBox.Show($"{empleadoSeleccionado.Nombre}: {estadoHorasExtras}", "Cambio de horas extras", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void btnVerRegistrosUsuarios_Click(object sender, EventArgs e)
+        {
+            FrmRegistroUsuarios formHistorialUsuarios = new FrmRegistroUsuarios();
+            formHistorialUsuarios.ShowDialog();
+        }
+
+        private void btnGuardarEmpleados_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog guardarEmpleadosDialog = new SaveFileDialog();
+            guardarEmpleadosDialog.Filter = "Json files(*.json)|*.json";
+
+            if (guardarEmpleadosDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = guardarEmpleadosDialog.FileName;
+                this.SerializarJson(path);
+            }
+        }
+
+        private void btnCargarEmpleados_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog cargarEmpleadosDialog = new OpenFileDialog();
+            cargarEmpleadosDialog.Filter = "Json files(*.json)|*.json";
+
+            if (cargarEmpleadosDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = cargarEmpleadosDialog.FileName;
+                this.DeserializarJson(path);
+            }
+        }
     }
 }

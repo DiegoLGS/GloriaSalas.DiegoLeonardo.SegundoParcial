@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PrimerParcial
 {
+    /// <summary>
+    /// Cocinero obtiene características de la clase abstracta Empleado, agrega especialidad(string) y certificacion(string)
+    /// que corresponde a sus características exclusivas.
+    /// </summary>
     public class Cocinero : Empleado
     {
         private string especialidad;
@@ -51,6 +55,11 @@ namespace PrimerParcial
             sb.AppendLine($"Certificación: {this.certificacion}");
 
             return sb.ToString();
+        }
+
+        public override string MostrarDatos()
+        {
+            return "Cocinero: " + base.MostrarDatos();
         }
     }
 }

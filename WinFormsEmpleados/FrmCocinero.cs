@@ -49,10 +49,6 @@ namespace WinFormsEmpleados
                 this.nuevoEmpleado = new Cocinero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, especialidades, this.txtCertificacion.Text);
                 this.DialogResult = DialogResult.OK;
             }
-            else
-            {
-                MessageBox.Show("Verifique que los campos no esten vacíos y los datos ingresados sean los correctos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
 
         /// <summary>

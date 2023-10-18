@@ -66,7 +66,7 @@
             btnAceptar.Location = new Point(82, 378);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(84, 47);
-            btnAceptar.TabIndex = 3;
+            btnAceptar.TabIndex = 7;
             btnAceptar.Text = "Aceptar";
             btnAceptar.UseVisualStyleBackColor = true;
             // 
@@ -75,7 +75,7 @@
             btnCancelar.Location = new Point(180, 378);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(84, 47);
-            btnCancelar.TabIndex = 4;
+            btnCancelar.TabIndex = 8;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
@@ -85,14 +85,14 @@
             txtNombre.Location = new Point(53, 27);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(257, 23);
-            txtNombre.TabIndex = 5;
+            txtNombre.TabIndex = 0;
             // 
             // txtLegajo
             // 
             txtLegajo.Location = new Point(53, 83);
             txtLegajo.Name = "txtLegajo";
             txtLegajo.Size = new Size(257, 23);
-            txtLegajo.TabIndex = 6;
+            txtLegajo.TabIndex = 1;
             // 
             // grpTurnoDeTrabajo
             // 
@@ -104,7 +104,7 @@
             grpTurnoDeTrabajo.Location = new Point(54, 126);
             grpTurnoDeTrabajo.Name = "grpTurnoDeTrabajo";
             grpTurnoDeTrabajo.Size = new Size(256, 100);
-            grpTurnoDeTrabajo.TabIndex = 7;
+            grpTurnoDeTrabajo.TabIndex = 5;
             grpTurnoDeTrabajo.TabStop = false;
             grpTurnoDeTrabajo.Text = "Turno de trabajo";
             // 
@@ -114,7 +114,7 @@
             rdoNochePartTime.Location = new Point(6, 72);
             rdoNochePartTime.Name = "rdoNochePartTime";
             rdoNochePartTime.Size = new Size(113, 19);
-            rdoNochePartTime.TabIndex = 4;
+            rdoNochePartTime.TabIndex = 6;
             rdoNochePartTime.Text = "Noche Part Time";
             rdoNochePartTime.UseVisualStyleBackColor = true;
             // 
@@ -124,7 +124,7 @@
             rdoTardePartTime.Location = new Point(6, 47);
             rdoTardePartTime.Name = "rdoTardePartTime";
             rdoTardePartTime.Size = new Size(106, 19);
-            rdoTardePartTime.TabIndex = 3;
+            rdoTardePartTime.TabIndex = 4;
             rdoTardePartTime.Text = "Tarde Part Time";
             rdoTardePartTime.UseVisualStyleBackColor = true;
             // 
@@ -134,7 +134,7 @@
             rdoMañanaFullTime.Location = new Point(133, 22);
             rdoMañanaFullTime.Name = "rdoMañanaFullTime";
             rdoMañanaFullTime.Size = new Size(119, 19);
-            rdoMañanaFullTime.TabIndex = 1;
+            rdoMañanaFullTime.TabIndex = 3;
             rdoMañanaFullTime.Text = "Mañana Full Time";
             rdoMañanaFullTime.UseVisualStyleBackColor = true;
             // 
@@ -145,7 +145,7 @@
             rdoMañanaPartTime.Location = new Point(6, 22);
             rdoMañanaPartTime.Name = "rdoMañanaPartTime";
             rdoMañanaPartTime.Size = new Size(121, 19);
-            rdoMañanaPartTime.TabIndex = 0;
+            rdoMañanaPartTime.TabIndex = 2;
             rdoMañanaPartTime.TabStop = true;
             rdoMañanaPartTime.Text = "Mañana Part Time";
             rdoMañanaPartTime.UseVisualStyleBackColor = true;
@@ -173,6 +173,7 @@
             Controls.Add(lblLegajo);
             Controls.Add(lblNombre);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "FrmEmpleado";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FrmEmpleado";

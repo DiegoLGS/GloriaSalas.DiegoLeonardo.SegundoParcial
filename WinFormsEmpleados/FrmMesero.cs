@@ -31,17 +31,13 @@ namespace WinFormsEmpleados
 
         private void btnAceptar_ClickMesero(object sender, EventArgs e)
         {
-            if (base.ComprobarCamposFormulario() && base.ComprobarValoresNumericos(this.txtNumeroDeMesas.Text))
+            if (base.ComprobarCamposFormulario() && base.ComprobarValoresNumericos(this.txtNumeroDeMesas.Text, 2))
             {
                 ETurnos turnoElegido = base.ObtenerTurnoTrabajo();
                 string zonaDeTrabajo = this.ObtenerZonaAtencion();
 
                 this.nuevoEmpleado = new Mesero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, zonaDeTrabajo, int.Parse(this.txtNumeroDeMesas.Text));
-                this.DialogResult = DialogResult.OK;                
-            }
-            else
-            {
-                MessageBox.Show("Verifique que los campos no esten vacíos y los datos ingresados sean los correctos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.DialogResult = DialogResult.OK;
             }
         }
 

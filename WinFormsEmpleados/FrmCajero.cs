@@ -31,17 +31,13 @@ namespace WinFormsEmpleados
 
         private void btnAceptar_ClickCajero(object sender, EventArgs e)
         {
-            if (base.ComprobarCamposFormulario() && base.ComprobarValoresNumericos(this.txtPropina.Text))
+            if (base.ComprobarCamposFormulario() && base.ComprobarValoresNumericos(this.txtPropina.Text, 6))
             {
                 ETurnos turnoElegido = base.ObtenerTurnoTrabajo();
                 int cajaAsignada = this.ObtenerCaja();
 
                 this.nuevoEmpleado = new Cajero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, int.Parse(this.txtPropina.Text), cajaAsignada);
                 this.DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                MessageBox.Show("Verifique que los campos no esten vacíos y los datos ingresados sean los correctos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -56,5 +52,6 @@ namespace WinFormsEmpleados
         {
             _ = cajaAsignada == 1 ? this.rdoCajaUno.Checked = true : this.rdoCajaDos.Checked = true;
         }
+
     }
 }

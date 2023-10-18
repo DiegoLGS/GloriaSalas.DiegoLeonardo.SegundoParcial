@@ -39,14 +39,47 @@
             // 
             // btnAceptar
             // 
+            btnAceptar.TabIndex = 10;
             btnAceptar.Click += btnAceptar_ClickCajero;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.TabIndex = 11;
+            // 
+            // txtNombre
+            // 
+            txtNombre.TabIndex = 0;
+            // 
+            // txtLegajo
+            // 
+            txtLegajo.TabIndex = 1;
+            // 
+            // rdoNochePartTime
+            // 
+            rdoNochePartTime.TabIndex = 6;
+            // 
+            // rdoTardePartTime
+            // 
+            rdoTardePartTime.TabIndex = 4;
+            // 
+            // rdoMañanaFullTime
+            // 
+            rdoMañanaFullTime.TabIndex = 3;
+            // 
+            // rdoMañanaPartTime
+            // 
+            rdoMañanaPartTime.TabIndex = 2;
+            // 
+            // rdoTardeFullTime
+            // 
+            rdoTardeFullTime.TabIndex = 5;
             // 
             // txtPropina
             // 
             txtPropina.Location = new Point(53, 256);
             txtPropina.Name = "txtPropina";
             txtPropina.Size = new Size(257, 23);
-            txtPropina.TabIndex = 8;
+            txtPropina.TabIndex = 7;
             // 
             // lblPropina
             // 
@@ -74,7 +107,7 @@
             rdoCajaDos.Location = new Point(145, 22);
             rdoCajaDos.Name = "rdoCajaDos";
             rdoCajaDos.Size = new Size(95, 19);
-            rdoCajaDos.TabIndex = 1;
+            rdoCajaDos.TabIndex = 9;
             rdoCajaDos.TabStop = true;
             rdoCajaDos.Text = "Caja 2 - Patio";
             rdoCajaDos.UseVisualStyleBackColor = true;
@@ -86,7 +119,7 @@
             rdoCajaUno.Location = new Point(16, 22);
             rdoCajaUno.Name = "rdoCajaUno";
             rdoCajaUno.Size = new Size(114, 19);
-            rdoCajaUno.TabIndex = 0;
+            rdoCajaUno.TabIndex = 8;
             rdoCajaUno.TabStop = true;
             rdoCajaUno.Text = "Caja 1 - Principal";
             rdoCajaUno.UseVisualStyleBackColor = true;
@@ -100,7 +133,7 @@
             Controls.Add(lblPropina);
             Controls.Add(txtPropina);
             Name = "FrmCajero";
-            Text = "FrmCajero";
+            Text = "Nuevo Cajero";
             Controls.SetChildIndex(btnAceptar, 0);
             Controls.SetChildIndex(btnCancelar, 0);
             Controls.SetChildIndex(txtNombre, 0);

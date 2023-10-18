@@ -70,7 +70,6 @@ namespace WinFormsEmpleados
             }
         }
 
-
         private void FrmLogin_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
