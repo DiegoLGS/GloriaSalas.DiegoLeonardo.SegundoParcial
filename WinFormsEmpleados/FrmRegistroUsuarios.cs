@@ -36,6 +36,5 @@ namespace WinFormsEmpleados
         {
             this.Close();
         }
-
     }
 }

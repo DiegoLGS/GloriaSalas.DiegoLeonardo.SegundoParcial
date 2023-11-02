@@ -93,8 +93,10 @@ namespace PrimerParcial
             string nombreSegundoEmpleado = segundoEmpleado;
             int legajoPrimerEmpleado = primerEmpleado;
             int legajoSegundoEmpleado = segundoEmpleado;
-
-            return nombrePrimerEmpleado == nombreSegundoEmpleado && legajoPrimerEmpleado == legajoSegundoEmpleado;
+            ETurnos turnoPrimerEmpleado = primerEmpleado;
+            ETurnos turnoSegundoEmpleado = segundoEmpleado;
+            
+            return (nombrePrimerEmpleado == nombreSegundoEmpleado && turnoPrimerEmpleado == turnoSegundoEmpleado) || legajoPrimerEmpleado == legajoSegundoEmpleado;
         }
 
         public static bool operator !=(Empleado primerEmpleado, Empleado segundoEmpleado)
@@ -110,6 +112,11 @@ namespace PrimerParcial
         public static implicit operator int(Empleado empleado)
         {
             return empleado.legajo;
+        }
+
+        public static implicit operator ETurnos(Empleado empleado)
+        {
+            return empleado.turnoDeTrabajo;
         }
     }
 }

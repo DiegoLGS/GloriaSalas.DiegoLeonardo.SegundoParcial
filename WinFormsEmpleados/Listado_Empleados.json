@@ -1,0 +1,10 @@
+[
+  {
+    "ZonaDeAtencion": "Segundo Piso",
+    "NumeroDeMesas": 1,
+    "Nombre": "Diego",
+    "Legajo": 1234,
+    "TurnoDeTrabajo": 0,
+    "DisponibleHorasExtras": false
+  }
+]

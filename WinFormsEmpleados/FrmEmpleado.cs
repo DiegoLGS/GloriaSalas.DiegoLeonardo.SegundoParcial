@@ -33,12 +33,14 @@ namespace WinFormsEmpleados
 
         /// <summary>
         /// ComprobarCamposFormulario() revisa que los TextBox no estén vacíos y llama a la función ComprobarValoresNumericos
-        /// para revisar los datos que deben ser únicamente números.
+        /// y ComprobarNombre para revisar los datos que deben ser únicamente números.
         /// </summary>
         /// <returns></returns>
         protected bool ComprobarCamposFormulario()
         {
             bool datosCargados = true;
+            bool nombreValido;
+            bool legajoValido;
 
             foreach (Control item in this.Controls)
             {
@@ -51,9 +53,10 @@ namespace WinFormsEmpleados
                 }
             }
 
-            datosCargados = ComprobarValoresNumericos(this.txtLegajo.Text, 5);
+            nombreValido = ComprobarNombre(this.txtNombre.Text);
+            legajoValido = ComprobarValoresNumericos(this.txtLegajo.Text, 5);
 
-            return datosCargados;
+            return datosCargados && nombreValido && legajoValido;
         }
 
         protected bool ComprobarValoresNumericos(string texto, int cantidadMaxCaracteres)
@@ -74,6 +77,22 @@ namespace WinFormsEmpleados
             else
             {
                 MessageBox.Show($"El valor ingresado '{texto}' no puedo superar los {cantidadMaxCaracteres} caracteres.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return resultado;
+        }
+
+        protected bool ComprobarNombre(string nombre)
+        {
+            bool resultado = false;
+
+            if (!Regex.IsMatch(nombre, @"^[a-zA-Z]+$"))
+            {
+                MessageBox.Show($"El nombre '{nombre}' solo debe contener letras y no debe contener números ni símbolos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                resultado = true;
             }
 
             return resultado;
