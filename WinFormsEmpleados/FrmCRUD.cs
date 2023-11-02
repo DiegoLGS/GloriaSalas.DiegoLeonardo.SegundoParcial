@@ -19,6 +19,38 @@ namespace WinFormsApp1
             this.empleadosActuales = new ListadoEmpleados();
             this.usuarioLogeado = usuarioLogeado;
             this.lblUsuario.Text = this.usuarioLogeado.ToString();
+            this.AdministrarPermisosUsuario(usuarioLogeado);
+        }
+
+        private void AdministrarPermisosUsuario(Usuario usuario)
+        {
+            if (usuario.perfil != "administrador")
+            {
+                this.btnEliminar.Enabled = false;
+
+                if (usuario.perfil != "supervisor")
+                {
+                    this.btnGuardarEmpleados.Enabled = false;
+                    this.btnCargarEmpleados.Enabled = false;
+                    this.rdoPorNombre.Enabled = false;
+                    this.rdoPorLegajo.Enabled = false;
+                    this.rdoAscendente.Enabled = false;
+                    this.rdoDescendente.Enabled = false;
+
+                    foreach (Control control in this.Controls)
+                    {
+                        if (control is Button)
+                        {
+                            Button boton = (Button)control;
+
+                            if (boton != this.btnVerRegistrosUsuarios && boton != this.btnInformacionDetallada)
+                            {
+                                boton.Enabled = false;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void ActualizarLista()
