@@ -86,7 +86,7 @@ namespace WinFormsEmpleados
         {
             bool resultado = false;
 
-            if (!Regex.IsMatch(nombre, @"^[a-zA-Z]+$"))
+            if (!Regex.IsMatch(nombre, @"^[a-zA-Z\s]+$"))
             {
                 MessageBox.Show($"El nombre '{nombre}' solo debe contener letras y no debe contener números ni símbolos.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

@@ -33,15 +33,26 @@ namespace WinFormsEmpleados
 
         private void CargarUsuarios()
         {
-            string path = @"..\..\..\MOCK_DATA.json";
-            if (File.Exists(path))
+            try
             {
-                using (StreamReader sr = new StreamReader(path))
+                string path = @"..\..\..\MOCK_DATA.json";
+                if (File.Exists(path))
                 {
-                    string json_str = sr.ReadToEnd();
+                    using (StreamReader sr = new StreamReader(path))
+                    {
+                        string json_str = sr.ReadToEnd();
 
-                    this.listaUsuarios = (List<Usuario>)JsonSerializer.Deserialize(json_str, typeof(List<Usuario>));
+                        this.listaUsuarios = (List<Usuario>)JsonSerializer.Deserialize(json_str, typeof(List<Usuario>));
+                    }
                 }
+            }
+            catch (JsonException ex)
+            {
+                MessageBox.Show($"Error en el formato del archivo JSON: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
