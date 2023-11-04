@@ -59,25 +59,38 @@ namespace WinFormsEmpleados
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            Usuario usuarioNuevo = null;
-
-            foreach (Usuario usuario in this.listaUsuarios)
+            try
             {
-                if (this.txtCorreo.Text == usuario.correo && this.txtPassword.Text == usuario.clave)
+                if (this.listaUsuarios == null)
                 {
-                    usuarioNuevo = usuario;
-                    break;
+                    throw new ListaUsuariosNoCargadaException("\nLa lista de usuarios no se ha cargado correctamente. Contáctese con un administrador.");
+                }
+
+                Usuario usuarioNuevo = null;
+
+                foreach (Usuario usuario in this.listaUsuarios)
+                {
+                    if (this.txtCorreo.Text == usuario.correo && this.txtPassword.Text == usuario.clave)
+                    {
+                        usuarioNuevo = usuario;
+                        break;
+                    }
+                }
+
+                if (usuarioNuevo != null)
+                {
+                    this.UsuarioLogeado = usuarioNuevo;
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("Correo o contraseña incorrecta.", "Ingreso inválido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            if (usuarioNuevo != null)
-            {
-                this.UsuarioLogeado = usuarioNuevo;
-                this.DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                MessageBox.Show("Correo o contraseña incorrecta.", "Ingreso inválido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

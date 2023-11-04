@@ -19,25 +19,17 @@ namespace PrimerParcial
         public string clave { get; set; }
         public string perfil { get; set; }
 
-        private string ObtenerFechaActual()
+        private string ObtenerFechaActual(string formato)
         {
             DateTime fechaActual = DateTime.Now;
-            string fechaFormateada = fechaActual.ToString("dd/MM/yyyy");
+            string fechaFormateada = fechaActual.ToString(formato);
 
             return fechaFormateada;
         }
 
-        private string ObtenerFechaYHoraActual()
-        {
-            DateTime fechaYHora = DateTime.Now;
-            string formato = "yyyy-MM-dd HH:mm:ss";
-            string fechaYHoraFormateada = fechaYHora.ToString(formato);
-            return fechaYHoraFormateada;
-        }
-
         public override string ToString()
         {
-            return $"Bienvenido/a: {this.nombre} {this.apellido} - Fecha: {this.ObtenerFechaActual()}";
+            return $"Bienvenido/a: {this.nombre} {this.apellido} - Fecha: {this.ObtenerFechaActual("dd/MM/yyyy")}";
         }
 
         /// <summary>
@@ -55,7 +47,7 @@ namespace PrimerParcial
             sb.AppendLine($"Correo: {this.correo}");
             sb.AppendLine($"Clave: {this.clave}");
             sb.AppendLine($"Perfil: {this.perfil}");
-            sb.AppendLine($"Fecha y hora: {this.ObtenerFechaYHoraActual()}");
+            sb.AppendLine($"Fecha y hora: {this.ObtenerFechaActual("yyyy-MM-dd HH:mm:ss")}");
             sb.AppendLine("---------------------------------------");
 
             return sb.ToString();
