@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimerParcial", "PrimerParc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsEmpleados", "WinFormsEmpleados\WinFormsEmpleados.csproj", "{ABA4C62D-722E-4EBF-8448-C47572101A39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionEmpleados.Test", "GestionEmpleados.Test\GestionEmpleados.Test.csproj", "{CA24DE1F-E49B-4BF7-8569-24021C5CFB78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{ABA4C62D-722E-4EBF-8448-C47572101A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABA4C62D-722E-4EBF-8448-C47572101A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABA4C62D-722E-4EBF-8448-C47572101A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA24DE1F-E49B-4BF7-8569-24021C5CFB78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA24DE1F-E49B-4BF7-8569-24021C5CFB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA24DE1F-E49B-4BF7-8569-24021C5CFB78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA24DE1F-E49B-4BF7-8569-24021C5CFB78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
