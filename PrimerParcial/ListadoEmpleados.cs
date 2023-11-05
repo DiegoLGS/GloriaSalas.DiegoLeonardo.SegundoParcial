@@ -10,11 +10,11 @@ namespace PrimerParcial
     /// <summary>
     /// ListadoEmpleados es una lista genérica que almacena a los derivados de Empleado, además los puede ordenar y comparar.
     /// </summary>
-    public class ListadoEmpleados
+    public class ListadoEmpleados<T> where T : Empleado
     {
-        public List<Empleado> listaDeEmpleados = new List<Empleado>();
+        public List<T> listaDeEmpleados = new List<T>();
 
-        public List<Empleado> ListaDeEmpleados 
+        public List<T> ListaDeEmpleados 
         {
             get { return listaDeEmpleados; } 
             set { listaDeEmpleados = value;}
@@ -41,11 +41,11 @@ namespace PrimerParcial
         /// <param name="empleadoAComprobar">Empleado que se buscará en la lista.</param>
         /// <param name="indice">Indice del empleado para evitar compararlo consigo mismo.</param>
         /// <returns></returns>
-        public static bool ComprobarCoindicencia(ListadoEmpleados lista, Empleado empleadoAComprobar, int indice)
+        public static bool ComprobarCoindicencia(ListadoEmpleados<T> lista, T empleadoAComprobar, int indice)
         {
             bool coincidencia = false;
 
-            foreach (Empleado empleado in lista.listaDeEmpleados)
+            foreach (T empleado in lista.listaDeEmpleados)
             {
                 if (empleado == empleadoAComprobar && indice != lista.listaDeEmpleados.IndexOf(empleado))
                 {
@@ -57,7 +57,7 @@ namespace PrimerParcial
             return coincidencia;
         }
 
-        public static bool operator +(ListadoEmpleados lista, Empleado empleado)
+        public static bool operator +(ListadoEmpleados<T> lista, T empleado)
         {
             bool respuesta = false;
 
@@ -69,7 +69,7 @@ namespace PrimerParcial
             return respuesta;
         }
 
-        public static bool operator -(ListadoEmpleados lista, Empleado empleado)
+        public static bool operator -(ListadoEmpleados<T> lista, T empleado)
         {
             bool respuesta = false;
 
@@ -81,7 +81,7 @@ namespace PrimerParcial
             return respuesta;
         }
 
-        public static bool operator ==(ListadoEmpleados lista, Empleado empleado)
+        public static bool operator ==(ListadoEmpleados<T> lista, T empleado)
         {
             bool respuesta = false;
 
@@ -93,7 +93,7 @@ namespace PrimerParcial
             return respuesta;
         }
 
-        public static bool operator !=(ListadoEmpleados lista, Empleado empleado)
+        public static bool operator !=(ListadoEmpleados<T> lista, T empleado)
         {
             return !(lista == empleado);
         }

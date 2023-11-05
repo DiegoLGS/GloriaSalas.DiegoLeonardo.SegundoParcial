@@ -8,7 +8,7 @@ namespace GestionEmpleados.Test
     public class EmpleadosTest
     {
         [TestMethod]
-        public void OperadorIgual_DeberiaRetornarTrue_CuandoEmpleadosSonIgualesPorNombreYTurno()
+        public void OperadorIgualDeberiaRetornarTrueCuandoEmpleadosSonIgualesPorNombreYTurno()
         {
             // Arrange
             Mesero empleadoUno = new Mesero("Juan", 1111, ETurnos.MañanaPartTime, "Patio", 4);
@@ -19,7 +19,7 @@ namespace GestionEmpleados.Test
         }
 
         [TestMethod]
-        public void OperadorIgual_DeberiaRetornarTrue_CuandoEmpleadosSonIgualesPorLegajo()
+        public void OperadorIgualDeberiaRetornarTrueCuandoEmpleadosSonIgualesPorLegajo()
         {
             // Arrange
             Mesero empleadoUno = new Mesero("Juan", 1111, ETurnos.MañanaPartTime, "Patio", 4);
@@ -30,7 +30,7 @@ namespace GestionEmpleados.Test
         }
 
         [TestMethod]
-        public void OperadorIgual_DeberiaRetornarFalse_CuandoEmpleadosSonDistintosPorNombreYTurnoOLegajo()
+        public void OperadorIgualDeberiaRetornarFalseCuandoEmpleadosSonDistintosPorNombreYTurnoOLegajo()
         {
             // Arrange
             Mesero empleadoUno = new Mesero("Juan", 1111, ETurnos.MañanaPartTime, "Principal", 10);
@@ -44,7 +44,7 @@ namespace GestionEmpleados.Test
         }
 
         [TestMethod]
-        public void ConversionImplicitaString_DeberiaRetornarNombreCorrecto()
+        public void ConversionImplicitaStringDeberiaRetornarNombreCorrecto()
         {
             // Arrange
             Cajero empleado = new Cajero("Franco", 1234, ETurnos.TardePartTime, 0, 1);
@@ -57,7 +57,7 @@ namespace GestionEmpleados.Test
         }
 
         [TestMethod]
-        public void ConversionImplicitaInt_DeberiaRetornarLegajoCorrecto()
+        public void ConversionImplicitaIntDeberiaRetornarLegajoCorrecto()
         {
             // Arrange
             Cajero empleado = new Cajero("Franco", 1234, ETurnos.TardePartTime, 0, 1);
@@ -70,7 +70,7 @@ namespace GestionEmpleados.Test
         }
 
         [TestMethod]
-        public void ConversionImplicitaETurnos_DeberiaRetornarTurnoCorrecto()
+        public void ConversionImplicitaETurnosDeberiaRetornarTurnoCorrecto()
         {
             // Arrange
             Cajero empleado = new Cajero("Franco", 1234, ETurnos.TardePartTime, 0, 1);
@@ -82,5 +82,30 @@ namespace GestionEmpleados.Test
             Assert.AreEqual(ETurnos.TardePartTime, turno);
         }
 
+        [TestMethod]
+        public void EmpleadoDeberiaIniciarDisponibilidadHorasExtrasTrue()
+        {
+            // Arrange
+            Cocinero empleado = new Cocinero("Carlos", 1001, ETurnos.TardeFullTime, "Pastas", "Chef Especialidad Italiana");
+
+            // Act
+            bool disponibilidadHorasExtras = empleado.DisponibleHorasExtras;
+
+            // Assert
+            Assert.IsTrue(disponibilidadHorasExtras);
+        }
+
+        [TestMethod]
+        public void EmpleadoCambiarDisponibilidadHorasExtrasDeberiaCambiarAFalse()
+        {
+            // Arrange
+            Cocinero empleado = new Cocinero("Lucía", 1020, ETurnos.MañanaPartTime, "Reposteria", "Maestra Patissier");
+
+            // Act
+            empleado.CambiarDisponibilidadHorasExtras();
+
+            // Assert
+            Assert.IsFalse(empleado.DisponibleHorasExtras);
+        }
     }
 }

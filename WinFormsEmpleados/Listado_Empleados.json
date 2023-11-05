@@ -1,11 +1,11 @@
 [
   {
-    "ZonaDeAtencion": "Segundo Piso",
-    "NumeroDeMesas": 1,
-    "Nombre": "Diego",
-    "Legajo": 1234,
-    "TurnoDeTrabajo": 0,
-    "DisponibleHorasExtras": false
+    "PropinaActual": 130000,
+    "CajaAsignada": 2,
+    "Nombre": "Valeria Sans",
+    "Legajo": 56789,
+    "TurnoDeTrabajo": 4,
+    "DisponibleHorasExtras": true
   },
   {
     "ZonaDeAtencion": "Segundo Piso",
@@ -13,6 +13,6 @@
     "Nombre": "Luis",
     "Legajo": 9999,
     "TurnoDeTrabajo": 4,
-    "DisponibleHorasExtras": true
+    "DisponibleHorasExtras": false
   }
 ]

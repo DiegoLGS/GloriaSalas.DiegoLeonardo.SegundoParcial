@@ -10,13 +10,13 @@ namespace WinFormsApp1
 {
     public partial class FrmCRUD : Form
     {
-        private ListadoEmpleados empleadosActuales;
+        private ListadoEmpleados<Empleado> empleadosActuales;
         private Usuario usuarioLogeado;
 
         public FrmCRUD(Usuario usuarioLogeado)
         {
             InitializeComponent();
-            this.empleadosActuales = new ListadoEmpleados();
+            this.empleadosActuales = new ListadoEmpleados<Empleado>();
             this.usuarioLogeado = usuarioLogeado;
             this.lblUsuario.Text = this.usuarioLogeado.ToString();
             this.AdministrarPermisosUsuario(usuarioLogeado);
@@ -132,13 +132,16 @@ namespace WinFormsApp1
             }
 
             Empleado empleadoAEliminar = this.empleadosActuales.listaDeEmpleados[indice];
-            bool eliminado = this.empleadosActuales - empleadoAEliminar;
 
-            if (eliminado)
+            if (MessageBox.Show("¿Estás seguro de que deseas eliminar a este empleado?", "Confirmar eliminación", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                this.ActualizarLista();
-            }
+                bool eliminado = this.empleadosActuales - empleadoAEliminar;
 
+                if (eliminado)
+                {
+                    this.ActualizarLista();
+                }
+            }
         }
 
         /// <summary>
@@ -181,7 +184,7 @@ namespace WinFormsApp1
                 {
                     bool coincidencia = false;
 
-                    coincidencia = ListadoEmpleados.ComprobarCoindicencia(this.empleadosActuales, frmEmpleadoSeleccionado.NuevoEmpleado, indice);
+                    coincidencia = ListadoEmpleados<Empleado>.ComprobarCoindicencia(this.empleadosActuales, frmEmpleadoSeleccionado.NuevoEmpleado, indice);
 
                     if (coincidencia)
                     {
