@@ -12,6 +12,7 @@ namespace WinFormsApp1
     {
         private ListadoEmpleados<Empleado> empleadosActuales;
         private Usuario usuarioLogeado;
+        private AdministradorBD miAdminBD = new AdministradorBD();
 
         public FrmCRUD(Usuario usuarioLogeado)
         {
@@ -89,8 +90,8 @@ namespace WinFormsApp1
 
                 if (formEmpleado.DialogResult == DialogResult.OK)
                 {
-                    if (this.AgregarEmpleado(formEmpleado.NuevoEmpleado))
-                    {
+                    if (this.AgregarEmpleado(formEmpleado.NuevoEmpleado, formEmpleado))
+                    {                        
                         break;
                     }
                 }
@@ -106,13 +107,25 @@ namespace WinFormsApp1
         /// un cartel informando que se encontró una coincidencia.
         /// </summary>
         /// <param name="empleadoParaAgregar">Empleado que se desea agregar a al lista</param>
-        private bool AgregarEmpleado(Empleado empleadoParaAgregar)
+        private bool AgregarEmpleado(Empleado empleadoParaAgregar, FrmEmpleado formEmpleado)
         {
             bool respuesta = this.empleadosActuales + empleadoParaAgregar;
 
             if (respuesta)
             {
                 this.ActualizarLista();
+                if (formEmpleado is FrmMesero)
+                {
+                    miAdminBD.AgregarEmpleadoBD((Mesero)empleadoParaAgregar);
+                }
+                else if (formEmpleado is FrmCocinero)
+                {
+                    miAdminBD.AgregarEmpleadoBD((Cocinero)empleadoParaAgregar);
+                }
+                else
+                {
+                    miAdminBD.AgregarEmpleadoBD((Cajero)empleadoParaAgregar);
+                }
             }
             else
             {
@@ -214,9 +227,6 @@ namespace WinFormsApp1
         {
             string path = @"..\..\..\";
             this.GuardarLogUsuarios(path);
-            path += @"\Listado_Empleados.json";
-
-            this.DeserializarJson(path);
         }
 
         private void DeserializarJson(string path)
@@ -260,9 +270,6 @@ namespace WinFormsApp1
             {
                 e.Cancel = true;
             }
-
-            string path = @"..\..\..\Listado_Empleados.json";
-            this.SerializarJson(path);
         }
 
         private void SerializarJson(string path)

@@ -1,18 +1,10 @@
 [
   {
-    "PropinaActual": 130000,
+    "PropinaActual": 10000,
     "CajaAsignada": 2,
-    "Nombre": "Valeria Sans",
-    "Legajo": 56789,
-    "TurnoDeTrabajo": 4,
+    "Nombre": "TestCajero",
+    "Legajo": 99999,
+    "TurnoDeTrabajo": 3,
     "DisponibleHorasExtras": true
-  },
-  {
-    "ZonaDeAtencion": "Segundo Piso",
-    "NumeroDeMesas": 8,
-    "Nombre": "Luis",
-    "Legajo": 9999,
-    "TurnoDeTrabajo": 4,
-    "DisponibleHorasExtras": false
   }
 ]

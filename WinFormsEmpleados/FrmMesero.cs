@@ -36,7 +36,8 @@ namespace WinFormsEmpleados
                 ETurnos turnoElegido = base.ObtenerTurnoTrabajo();
                 string zonaDeTrabajo = this.ObtenerZonaAtencion();
 
-                this.nuevoEmpleado = new Mesero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, zonaDeTrabajo, int.Parse(this.txtNumeroDeMesas.Text));
+                this.nuevoEmpleado = new Mesero(base.txtNombre.Text, int.Parse(base.txtLegajo.Text), turnoElegido, zonaDeTrabajo, int.Parse(this.txtNumeroDeMesas.Text));                
+                
                 this.DialogResult = DialogResult.OK;
             }
         }

@@ -27,8 +27,8 @@ namespace WinFormsEmpleados
         public FrmLogin()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.CargarUsuarios();
+            this.StartPosition = FormStartPosition.CenterScreen;            
+            this.CargarUsuarios();            
         }
 
         private void CargarUsuarios()
@@ -91,7 +91,7 @@ namespace WinFormsEmpleados
             {
                 MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            }
+            }            
         }
 
         private void FrmLogin_KeyPress(object sender, KeyPressEventArgs e)
