@@ -149,6 +149,8 @@ namespace WinFormsApp1
             if (MessageBox.Show("¿Estás seguro de que deseas eliminar a este empleado?", "Confirmar eliminación", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 bool eliminado = this.empleadosActuales - empleadoAEliminar;
+                string tabla = (empleadoAEliminar is Mesero) ? "meseros" : (empleadoAEliminar is Cocinero) ? "cocineros" : "cajeros";
+                _ = miAdminBD.EliminarEmpleadoPorLegajo(empleadoAEliminar.Legajo, tabla);
 
                 if (eliminado)
                 {
@@ -227,6 +229,9 @@ namespace WinFormsApp1
         {
             string path = @"..\..\..\";
             this.GuardarLogUsuarios(path);
+
+            this.empleadosActuales.listaDeEmpleados = miAdminBD.ObtenerListaEmpleados();
+            this.ActualizarLista();
         }
 
         private void DeserializarJson(string path)

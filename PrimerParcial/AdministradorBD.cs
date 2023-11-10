@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PrimerParcial
 {
@@ -101,6 +102,93 @@ namespace PrimerParcial
             }
 
             return respuesta;
+        }
+
+        public List<Empleado> ObtenerListaEmpleados()
+        {
+            ListadoEmpleados<Empleado> listaCargada = new ListadoEmpleados<Empleado>();
+
+            try
+            {
+                listaCargada.listaDeEmpleados.AddRange(ObtenerEmpleadosDesdeTabla("meseros", "zona_atencion", "mesas_asignadas"));
+                listaCargada.listaDeEmpleados.AddRange(ObtenerEmpleadosDesdeTabla("cocineros", "especialidad", "certificacion"));
+                listaCargada.listaDeEmpleados.AddRange(ObtenerEmpleadosDesdeTabla("cajeros", "propina", "caja_asignada"));
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return listaCargada.listaDeEmpleados;
+        }
+
+        private List<Empleado> ObtenerEmpleadosDesdeTabla(string tabla, string columnaEspecialUno, string columnaEspecialDos)
+        {
+            ListadoEmpleados<Empleado> listaTablaEspecifica = new ListadoEmpleados<Empleado>();
+
+            try
+            {
+                this.comando = new SqlCommand();
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = $"SELECT nombre, legajo, turno, horas_extra, {columnaEspecialUno}, {columnaEspecialDos} FROM {tabla}";
+                this.comando.Connection = this.conexion;
+
+                this.conexion.Open();
+
+                this.lector = this.comando.ExecuteReader();
+
+                while (this.lector.Read())
+                {
+                    Empleado empleado = null;
+
+                    switch (tabla)
+                    {
+                        case "meseros":
+                            empleado = new Mesero(this.lector["nombre"].ToString(), (int)this.lector["legajo"], (ETurnos)(byte)this.lector["turno"], this.lector["zona_atencion"].ToString(), (byte)this.lector["mesas_asignadas"]);
+                            break;
+
+                        case "cocineros":
+                            empleado = new Cocinero(this.lector["nombre"].ToString(), (int)this.lector["legajo"], (ETurnos)(byte)this.lector["turno"], this.lector["especialidad"].ToString(), this.lector["certificacion"].ToString());
+                            break;
+
+                        case "cajeros":
+                            empleado = new Cajero(this.lector["nombre"].ToString(), (int)this.lector["legajo"], (ETurnos)(byte)this.lector["turno"], (int)this.lector["propina"], (byte)this.lector["caja_asignada"]);
+                            break;                        
+                    }
+
+                    if (!(empleado is null))
+                    {
+                        empleado.DisponibleHorasExtras = (bool)this.lector["horas_extra"];
+                        _ = listaTablaEspecifica + empleado;
+                    }
+
+                }
+
+                this.lector.Close();
+
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                if (this.conexion.State == System.Data.ConnectionState.Open)
+                {
+                    this.conexion.Close();
+                }
+            }
+
+            return listaTablaEspecifica.listaDeEmpleados;
+        }
+
+        public bool EliminarEmpleadoPorLegajo(int legajo, string tabla)
+        {
+            this.comando = new SqlCommand();
+            this.comando.CommandType = System.Data.CommandType.Text;
+            this.comando.Connection = this.conexion;
+            this.comando.Parameters.AddWithValue("@legajo", legajo);
+            this.comando.CommandText = $"DELETE FROM {tabla} WHERE legajo = @legajo";
+
+            return EjecutarComando(this.comando);                
         }
     }
 }
