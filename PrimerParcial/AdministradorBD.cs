@@ -28,9 +28,7 @@ namespace PrimerParcial
         public bool AgregarEmpleadoBD(Mesero mesero)
         {
             this.comando = this.ConfigurarParametrosComunes(mesero);
-
-            this.comando.Parameters.AddWithValue("@zona_atencion", mesero.ZonaDeAtencion);
-            this.comando.Parameters.AddWithValue("@mesas_asignadas", mesero.NumeroDeMesas);
+            this.comando = this.ConfigurarParametrosEspeciales(mesero); 
             this.comando.CommandType = System.Data.CommandType.Text;
             this.comando.CommandText = "INSERT INTO meseros (nombre, legajo, turno, horas_extra, zona_atencion, mesas_asignadas) VALUES (@nombre, @legajo, @turno, @horas_extra, @zona_atencion, @mesas_asignadas)";
 
@@ -40,9 +38,7 @@ namespace PrimerParcial
         public bool AgregarEmpleadoBD(Cocinero cocinero)
         {
             this.comando = this.ConfigurarParametrosComunes(cocinero);
-
-            this.comando.Parameters.AddWithValue("@especialidad", cocinero.Especialidad);
-            this.comando.Parameters.AddWithValue("@certificacion", cocinero.Certificacion);
+            this.comando = this.ConfigurarParametrosEspeciales(cocinero);            
             this.comando.CommandType = System.Data.CommandType.Text;
             this.comando.CommandText = "INSERT INTO cocineros (nombre, legajo, turno, horas_extra, especialidad, certificacion) VALUES (@nombre, @legajo, @turno, @horas_extra, @especialidad, @certificacion)";
 
@@ -52,9 +48,7 @@ namespace PrimerParcial
         public bool AgregarEmpleadoBD(Cajero cajero)
         {
             this.comando = this.ConfigurarParametrosComunes(cajero);
-
-            this.comando.Parameters.AddWithValue("@propina", cajero.PropinaActual);
-            this.comando.Parameters.AddWithValue("@caja_asignada", cajero.CajaAsignada);
+            this.comando = this.ConfigurarParametrosEspeciales(cajero);
             this.comando.CommandType = System.Data.CommandType.Text;
             this.comando.CommandText = "INSERT INTO cajeros (nombre, legajo, turno, horas_extra, propina, caja_asignada) VALUES (@nombre, @legajo, @turno, @horas_extra, @propina, @caja_asignada)";
 
@@ -71,6 +65,30 @@ namespace PrimerParcial
 
             return comando;
         }
+
+        private SqlCommand ConfigurarParametrosEspeciales(Mesero mesero)
+        {
+            comando.Parameters.AddWithValue("@zona_atencion", mesero.ZonaDeAtencion);
+            comando.Parameters.AddWithValue("@mesas_asignadas", mesero.NumeroDeMesas);
+
+            return comando;
+        }
+
+        private SqlCommand ConfigurarParametrosEspeciales(Cocinero cocinero)
+        {
+            comando.Parameters.AddWithValue("@especialidad", cocinero.Especialidad);
+            comando.Parameters.AddWithValue("@certificacion", cocinero.Certificacion);
+
+            return comando;
+        }
+
+        private SqlCommand ConfigurarParametrosEspeciales(Cajero cajero)
+        {
+            this.comando.Parameters.AddWithValue("@propina", cajero.PropinaActual);
+            this.comando.Parameters.AddWithValue("@caja_asignada", cajero.CajaAsignada);
+
+            return comando;
+        }        
 
         private bool EjecutarComando(SqlCommand comando)
         {
@@ -189,6 +207,32 @@ namespace PrimerParcial
             this.comando.CommandText = $"DELETE FROM {tabla} WHERE legajo = @legajo";
 
             return EjecutarComando(this.comando);                
+        }
+
+        public bool ModificarEmpleadoPorLegajo(Empleado empleado, int legajoOriginal)
+        {
+            this.comando = this.ConfigurarParametrosComunes(empleado);
+
+            if (empleado is Mesero)
+            {
+                this.comando = this.ConfigurarParametrosEspeciales((Mesero)empleado);
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = $"UPDATE meseros SET nombre = @nombre, legajo = @legajo, turno = @turno, horas_extra = @horas_extra, zona_atencion = @zona_atencion, mesas_asignadas = @mesas_asignadas WHERE legajo = {legajoOriginal}";
+            }
+            else if (empleado is Cocinero)
+            {
+                this.comando = this.ConfigurarParametrosEspeciales((Cocinero)empleado);
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = $"UPDATE cocineros SET nombre = @nombre, legajo = @legajo, turno = @turno, horas_extra = @horas_extra, especialidad = @especialidad, certificacion = @certificacion WHERE legajo = {legajoOriginal}";
+            }
+            else
+            {
+                this.comando = this.ConfigurarParametrosEspeciales((Cajero)empleado);
+                this.comando.CommandType = System.Data.CommandType.Text;
+                this.comando.CommandText = $"UPDATE cajeros SET nombre = @nombre, legajo = @legajo, turno = @turno, horas_extra = @horas_extra, propina = @propina, caja_asignada = @caja_asignada WHERE legajo = {legajoOriginal}";
+            }
+            
+            return EjecutarComando(this.comando);
         }
     }
 }

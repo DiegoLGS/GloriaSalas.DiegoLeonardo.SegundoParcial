@@ -197,7 +197,7 @@ namespace WinFormsApp1
 
                 if (frmEmpleadoSeleccionado.DialogResult == DialogResult.OK)
                 {
-                    bool coincidencia = false;
+                    bool coincidencia;
 
                     coincidencia = ListadoEmpleados<Empleado>.ComprobarCoindicencia(this.empleadosActuales, frmEmpleadoSeleccionado.NuevoEmpleado, indice);
 
@@ -207,7 +207,9 @@ namespace WinFormsApp1
                     }
                     else
                     {
+                        int legajoOriginal = this.empleadosActuales.listaDeEmpleados[indice].Legajo;
                         this.empleadosActuales.listaDeEmpleados[indice] = frmEmpleadoSeleccionado.NuevoEmpleado;
+                        miAdminBD.ModificarEmpleadoPorLegajo(frmEmpleadoSeleccionado.NuevoEmpleado, legajoOriginal);
                         this.ActualizarLista();
                         break;
                     }
@@ -339,6 +341,7 @@ namespace WinFormsApp1
             string estadoHorasExtras;
             Empleado empleadoSeleccionado = this.empleadosActuales.listaDeEmpleados[indice];
             empleadoSeleccionado.CambiarDisponibilidadHorasExtras();
+            miAdminBD.ModificarEmpleadoPorLegajo(empleadoSeleccionado, empleadoSeleccionado.Legajo);
             estadoHorasExtras = empleadoSeleccionado.DisponibleHorasExtras ? "Disponible para realizar horas extras." : "No disponible para realizar horas extras.";
             MessageBox.Show($"{empleadoSeleccionado.Nombre}: {estadoHorasExtras}", "Cambio de horas extras", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
