@@ -14,7 +14,7 @@ namespace WinFormsApp1
             FrmLogin frmLogin = new FrmLogin();
             if (frmLogin.ShowDialog() == DialogResult.OK)
             {
-                Application.Run(new FrmCRUD(frmLogin.UsuarioLogeado));
+                Application.Run(new FrmCRUD(frmLogin.UsuarioLogeado.ToString, frmLogin.UsuarioLogeado.ObtenerDatosLog, frmLogin.UsuarioLogeado.perfil));
             }
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.

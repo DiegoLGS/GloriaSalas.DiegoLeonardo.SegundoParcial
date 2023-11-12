@@ -11,25 +11,27 @@ namespace WinFormsApp1
     public partial class FrmCRUD : Form
     {
         private ListadoEmpleados<Empleado> empleadosActuales;
-        private Usuario usuarioLogeado;
         private AdministradorBD miAdminBD = new AdministradorBD();
+        private Func<string> delegadoObtenerNombreYFecha;
+        private Func<string> delegadoObtenerDatosLog;        
 
-        public FrmCRUD(Usuario usuarioLogeado)
+        public FrmCRUD(Func<string> delegadoObtenerNombreYFecha, Func<string> obtenerDatosLog, string perfilUsuario)
         {
             InitializeComponent();
             this.empleadosActuales = new ListadoEmpleados<Empleado>();
-            this.usuarioLogeado = usuarioLogeado;
-            this.lblUsuario.Text = this.usuarioLogeado.ToString();
-            this.AdministrarPermisosUsuario(usuarioLogeado);
+            this.delegadoObtenerNombreYFecha = delegadoObtenerNombreYFecha;
+            this.delegadoObtenerDatosLog = obtenerDatosLog;
+            this.lblUsuario.Text = this.delegadoObtenerNombreYFecha.Invoke();
+            this.AdministrarPermisosUsuario(perfilUsuario);
         }
 
-        private void AdministrarPermisosUsuario(Usuario usuario)
+        private void AdministrarPermisosUsuario(string perfilUsuario)
         {
-            if (usuario.perfil != "administrador")
+            if (perfilUsuario != "administrador")
             {
                 this.btnEliminar.Enabled = false;
 
-                if (usuario.perfil != "supervisor")
+                if (perfilUsuario != "supervisor")
                 {
                     this.btnGuardarEmpleados.Enabled = false;
                     this.btnCargarEmpleados.Enabled = false;
@@ -222,7 +224,7 @@ namespace WinFormsApp1
         }
 
         /// <summary>
-        /// FrmCRUD_Load() Guarda la información del usuario logeado a la vez que sube un archivo .json (si existe) y carga su contenido
+        /// FrmCRUD_Load() Guarda la información del usuario logeado a la vez que carga los empleados guardados en la base de datos.
         /// en una lista
         /// </summary>
         /// <param name="sender"></param>
@@ -265,12 +267,7 @@ namespace WinFormsApp1
                 this.ActualizarLista();
             }
         }
-
-        /// <summary>
-        /// FrmCRUD_FormClosing() guarda la lista de empleados en un .json para mantener su almacenamiento fuera del funcionamiento del programa.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         private void FrmCRUD_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("¿Desea salir de la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -291,7 +288,7 @@ namespace WinFormsApp1
 
             using (StreamWriter sw = File.AppendText(path))
             {
-                string usuarioYHora = this.usuarioLogeado.ObtenerDatosLog();
+                string usuarioYHora = this.delegadoObtenerDatosLog.Invoke();
 
                 sw.Write(usuarioYHora);
             }
