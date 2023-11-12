@@ -107,9 +107,13 @@ namespace PrimerParcial
                     respuesta = true;
                 }
             }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Se produjo un error con la base de datos: {sqlEx.Message}");
+            }
             catch (Exception ex)
             {
-                
+                MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);                
             }
             finally
             {
@@ -134,6 +138,7 @@ namespace PrimerParcial
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Se produjo un error inesperado cargando la lista de empleados: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return listaCargada.listaDeEmpleados;
@@ -182,10 +187,14 @@ namespace PrimerParcial
                 }
 
                 this.lector.Close();
-
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"Error de SQL al obtener empleados desde la tabla {tabla}: {sqlEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
+                MessageBox.Show($"Error inesperado al obtener empleados desde la tabla {tabla}: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
