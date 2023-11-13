@@ -13,14 +13,14 @@ namespace WinFormsApp1
         private ListadoEmpleados<Empleado> empleadosActuales;
         private AdministradorBD miAdminBD = new AdministradorBD();
         private Func<string> delegadoObtenerNombreYFecha;
-        private Func<string> delegadoObtenerDatosLog;        
+        private Func<string> delegadoMostrarDatos;        
 
-        public FrmCRUD(Func<string> delegadoObtenerNombreYFecha, Func<string> obtenerDatosLog, string perfilUsuario)
+        public FrmCRUD(Func<string> delegadoObtenerNombreYFecha, Func<string> delegadoMostrarDatos, string perfilUsuario)
         {
             InitializeComponent();
             this.empleadosActuales = new ListadoEmpleados<Empleado>();
             this.delegadoObtenerNombreYFecha = delegadoObtenerNombreYFecha;
-            this.delegadoObtenerDatosLog = obtenerDatosLog;
+            this.delegadoMostrarDatos = delegadoMostrarDatos;
             this.lblUsuario.Text = this.delegadoObtenerNombreYFecha.Invoke();
             this.AdministrarPermisosUsuario(perfilUsuario);
         }
@@ -288,7 +288,7 @@ namespace WinFormsApp1
 
             using (StreamWriter sw = File.AppendText(path))
             {
-                string usuarioYHora = this.delegadoObtenerDatosLog.Invoke();
+                string usuarioYHora = this.delegadoMostrarDatos.Invoke();
 
                 sw.Write(usuarioYHora);
             }

@@ -10,7 +10,7 @@ namespace PrimerParcial
     /// Usuario almacena los datos del usuario logeado en la aplicación, puede mostrarlos junto con la fecha o fecha y hora
     /// del momento del ingreso.
     /// </summary>
-    public class Usuario
+    public class Usuario : IMostrarDatos
     {
         public string apellido { get; set; }
         public string nombre { get; set; }
@@ -33,10 +33,10 @@ namespace PrimerParcial
         }
 
         /// <summary>
-        /// ObtenerDatosLog() Realiza una descripción completa del usuario logeado incluyendo fecha y hora del ingreso.
+        /// MostrarDatos() Realiza una descripción completa del usuario logeado incluyendo fecha y hora del ingreso.
         /// </summary>
         /// <returns>La información reunida.</returns>
-        public string ObtenerDatosLog()
+        public string MostrarDatos()
         {
             StringBuilder sb = new StringBuilder();
 

@@ -9,7 +9,7 @@ namespace PrimerParcial
     /// <summary>
     /// Empleado es una clase que sirve como base para sus tres derivados, reuniendo atributos y métodos comunes entre ellos.
     /// </summary>
-    public abstract class Empleado
+    public abstract class Empleado : IMostrarDatos
     {
         protected string nombre;
         protected int legajo;

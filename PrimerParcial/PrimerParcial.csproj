@@ -186,6 +186,7 @@
     <Compile Include="Cocinero.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Enumerados.cs" />
+    <Compile Include="IMostrarDatos.cs" />
     <Compile Include="ListadoEmpleados.cs" />
     <Compile Include="ListaUsuariosNoCargadaException.cs" />
     <Compile Include="Mesero.cs" />

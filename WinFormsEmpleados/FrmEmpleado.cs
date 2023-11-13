@@ -120,7 +120,7 @@ namespace WinFormsEmpleados
         }
 
         /// <summary>
-        /// EstablecerCamposComunes() recibe un parametro del tipo Empleado para tomar y plasmar los datos que se tiene con común
+        /// EstablecerCamposComunes() recibe un parametro del tipo Empleado para tomar y plasmar los datos que se tiene en común
         /// con todos los tipos de empleados en el formulario.
         /// </summary>
         /// <param name="empleado">variable a la que se tomará sus datos.</param>
