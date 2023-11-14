@@ -7,16 +7,19 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinFormsEmpleados
 {
+    public delegate void LoginFalladoEventHandler(int intentos, Form formulario);
+
     public partial class FrmLogin : Form
     {
         private List<Usuario> listaUsuarios;
         private Usuario usuarioLogeado;
+        public event LoginFalladoEventHandler LoginFallado;
+        private int numeroIntento;
 
         public Usuario UsuarioLogeado
         {
@@ -27,35 +30,11 @@ namespace WinFormsEmpleados
         public FrmLogin()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;            
-            this.CargarUsuarios();            
-        }
-
-        private void CargarUsuarios()
-        {
-            try
-            {
-                string path = @"..\..\..\MOCK_DATA.json";
-                if (File.Exists(path))
-                {
-                    using (StreamReader sr = new StreamReader(path))
-                    {
-                        string json_str = sr.ReadToEnd();
-
-                        this.listaUsuarios = (List<Usuario>)JsonSerializer.Deserialize(json_str, typeof(List<Usuario>));
-                    }
-                }
-            }
-            catch (JsonException ex)
-            {
-                MessageBox.Show($"Error en el formato del archivo JSON: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.numeroIntento = 0;
+            this.listaUsuarios = AdministradorJson.CargarUsuarios(@"..\..\..\MOCK_DATA.json");
+            this.LoginFallado += AdministradorJson.IntentosLogin;
+        }        
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
@@ -84,7 +63,8 @@ namespace WinFormsEmpleados
                 }
                 else
                 {
-                    MessageBox.Show("Correo o contraseña incorrecta.", "Ingreso inválido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    this.numeroIntento++;
+                    this.LoginFallado.Invoke(this.numeroIntento, this);
                 }
             }
             catch (Exception ex)

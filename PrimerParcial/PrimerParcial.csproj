@@ -182,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdministradorBD.cs" />
+    <Compile Include="AdministradorJson.cs" />
     <Compile Include="Cajero.cs" />
     <Compile Include="Cocinero.cs" />
     <Compile Include="Empleado.cs" />
