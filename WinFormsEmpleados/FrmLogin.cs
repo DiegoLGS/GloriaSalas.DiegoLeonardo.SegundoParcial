@@ -20,6 +20,7 @@ namespace WinFormsEmpleados
         private Usuario usuarioLogeado;
         public event LoginFalladoEventHandler LoginFallado;
         private int numeroIntento;
+        private AdministradorJson adminJson;
 
         public Usuario UsuarioLogeado
         {
@@ -32,7 +33,8 @@ namespace WinFormsEmpleados
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.numeroIntento = 0;
-            this.listaUsuarios = AdministradorJson.CargarUsuarios(@"..\..\..\MOCK_DATA.json");
+            this.adminJson = new AdministradorJson();
+            this.listaUsuarios = adminJson.CargarArchivo(@"..\..\..\MOCK_DATA.json");
             this.LoginFallado += AdministradorJson.IntentosLogin;
         }        
 

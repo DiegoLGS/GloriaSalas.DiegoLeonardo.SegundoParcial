@@ -11,7 +11,8 @@ namespace WinFormsApp1
     public partial class FrmCRUD : Form
     {
         private ListadoEmpleados<Empleado> empleadosActuales;
-        private AdministradorBD miAdminBD = new AdministradorBD();
+        private AdministradorBD miAdminBD;
+        private AdministradorLog miAdminLog;
         private Func<string> delegadoObtenerNombreYFecha;
         private Func<string> delegadoMostrarDatos;        
 
@@ -19,6 +20,8 @@ namespace WinFormsApp1
         {
             InitializeComponent();
             this.empleadosActuales = new ListadoEmpleados<Empleado>();
+            this.miAdminBD = new AdministradorBD();
+            this.miAdminLog = new AdministradorLog();
             this.delegadoObtenerNombreYFecha = delegadoObtenerNombreYFecha;
             this.delegadoMostrarDatos = delegadoMostrarDatos;
             this.lblUsuario.Text = this.delegadoObtenerNombreYFecha.Invoke();
@@ -231,9 +234,7 @@ namespace WinFormsApp1
         /// <param name="e"></param>
         private void FrmCRUD_Load(object sender, EventArgs e)
         {
-            string path = @"..\..\..\";
-            this.GuardarLogUsuarios(path);
-
+            this.miAdminLog.GuardarArchivo(@"..\..\..\Usuarios_logeados.log", this.delegadoMostrarDatos.Invoke());
             this.empleadosActuales.listaDeEmpleados = miAdminBD.ObtenerListaEmpleados();
             this.ActualizarLista();
         }
@@ -280,18 +281,6 @@ namespace WinFormsApp1
         {
             string json = JsonConvert.SerializeObject(this.empleadosActuales.listaDeEmpleados, Formatting.Indented);
             File.WriteAllText(path, json);
-        }
-
-        private void GuardarLogUsuarios(string path)
-        {
-            path += @"\Usuarios_logeados.log";
-
-            using (StreamWriter sw = File.AppendText(path))
-            {
-                string usuarioYHora = this.delegadoMostrarDatos.Invoke();
-
-                sw.Write(usuarioYHora);
-            }
         }
 
         private void btnInformacionDetallada_Click(object sender, EventArgs e)

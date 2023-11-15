@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace PrimerParcial
 {
-    public static class AdministradorJson
+    public class AdministradorJson : ICargarArchivo<List<Usuario>>
     {
         private static int maximosIntentosFallidos;
 
@@ -18,13 +18,12 @@ namespace PrimerParcial
             AdministradorJson.maximosIntentosFallidos = 3;
         }
 
-        public static List<Usuario> CargarUsuarios(string path)
+        public List<Usuario> CargarArchivo(string path)
         {
             List<Usuario> listaCargada = null;
 
             try
             {
-
                 if (File.Exists(path))
                 {
                     using (StreamReader sr = new StreamReader(path))
@@ -33,9 +32,7 @@ namespace PrimerParcial
 
                         listaCargada = (List<Usuario>)JsonSerializer.Deserialize(json_str, typeof(List<Usuario>));
                     }
-
                 }
-
             }
             catch (JsonException ex)
             {
