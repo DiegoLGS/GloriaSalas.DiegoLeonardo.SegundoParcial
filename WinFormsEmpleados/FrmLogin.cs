@@ -20,7 +20,7 @@ namespace WinFormsEmpleados
         private Usuario usuarioLogeado;
         public event LoginFalladoEventHandler LoginFallado;
         private int numeroIntento;
-        private AdministradorJson adminJson;
+        private AdministradorArchivos<List<Usuario>> adminJson;
 
         public Usuario UsuarioLogeado
         {
@@ -33,9 +33,9 @@ namespace WinFormsEmpleados
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.numeroIntento = 0;
-            this.adminJson = new AdministradorJson();
+            this.adminJson = new AdministradorArchivos<List<Usuario>>();
             this.listaUsuarios = adminJson.CargarArchivo(@"..\..\..\MOCK_DATA.json");
-            this.LoginFallado += AdministradorJson.IntentosLogin;
+            this.LoginFallado += AdministradorArchivos<List<Usuario>>.IntentosLogin;
         }        
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -72,7 +72,6 @@ namespace WinFormsEmpleados
             catch (Exception ex)
             {
                 MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }            
         }
 

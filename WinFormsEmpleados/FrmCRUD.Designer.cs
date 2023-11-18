@@ -223,9 +223,9 @@
             // 
             // btnOrdenarLista
             // 
-            btnOrdenarLista.Location = new Point(276, 392);
+            btnOrdenarLista.Location = new Point(271, 392);
             btnOrdenarLista.Name = "btnOrdenarLista";
-            btnOrdenarLista.Size = new Size(73, 64);
+            btnOrdenarLista.Size = new Size(85, 64);
             btnOrdenarLista.TabIndex = 11;
             btnOrdenarLista.Text = "Ordenar";
             btnOrdenarLista.UseVisualStyleBackColor = true;

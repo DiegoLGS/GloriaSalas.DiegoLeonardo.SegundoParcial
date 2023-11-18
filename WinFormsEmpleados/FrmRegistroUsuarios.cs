@@ -13,12 +13,12 @@ namespace WinFormsEmpleados
 {
     public partial class FrmRegistroUsuarios : Form
     {
-        private AdministradorLog adminLog;
+        private AdministradorArchivos<string> adminLog;
 
         public FrmRegistroUsuarios()
         {
             InitializeComponent();
-            adminLog = new AdministradorLog();
+            adminLog = new AdministradorArchivos<string>();
         }
 
         private void FrmRegistroUsuarios_Load(object sender, EventArgs e)

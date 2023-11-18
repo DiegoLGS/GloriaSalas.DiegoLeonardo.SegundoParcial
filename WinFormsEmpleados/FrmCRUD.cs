@@ -11,17 +11,19 @@ namespace WinFormsApp1
     public partial class FrmCRUD : Form
     {
         private ListadoEmpleados<Empleado> empleadosActuales;
-        private AdministradorBD miAdminBD;
-        private AdministradorLog miAdminLog;
+        private AdministradorBD administradorBD;
+        private AdministradorArchivos<string> administradorLog;
         private Func<string> delegadoObtenerNombreYFecha;
-        private Func<string> delegadoMostrarDatos;        
+        private Func<string> delegadoMostrarDatos;
+        private delegate void DelegadoActualizarLista();
+        private Task actualizarListaTask;
 
         public FrmCRUD(Func<string> delegadoObtenerNombreYFecha, Func<string> delegadoMostrarDatos, string perfilUsuario)
         {
             InitializeComponent();
             this.empleadosActuales = new ListadoEmpleados<Empleado>();
-            this.miAdminBD = new AdministradorBD();
-            this.miAdminLog = new AdministradorLog();
+            this.administradorBD = new AdministradorBD();
+            this.administradorLog = new AdministradorArchivos<string>();
             this.delegadoObtenerNombreYFecha = delegadoObtenerNombreYFecha;
             this.delegadoMostrarDatos = delegadoMostrarDatos;
             this.lblUsuario.Text = this.delegadoObtenerNombreYFecha.Invoke();
@@ -59,16 +61,40 @@ namespace WinFormsApp1
             }
         }
 
-        private void ActualizarLista()
+        private async void ActualizarLista()
         {
-            this.lstEmpleados.Items.Clear();
-
-            if (this.empleadosActuales.listaDeEmpleados != null && this.empleadosActuales.listaDeEmpleados.Any())
+            if (this.InvokeRequired)
             {
-                foreach (Empleado empleado in this.empleadosActuales.listaDeEmpleados)
+                DelegadoActualizarLista delegadoActualizar = new DelegadoActualizarLista(this.ActualizarLista);
+                this.Invoke(delegadoActualizar);
+            }
+            else
+            {
+                this.btnOrdenarLista.Enabled = false;
+                this.btnOrdenarLista.Text = "Cargando lista...";
+                this.lstEmpleados.Items.Clear();
+
+                if (this.empleadosActuales.listaDeEmpleados != null && this.empleadosActuales.listaDeEmpleados.Any())
                 {
-                    lstEmpleados.Items.Add(empleado.ToString());
+                    try
+                    {
+                        foreach (Empleado empleado in this.empleadosActuales.listaDeEmpleados)
+                        {
+                            lstEmpleados.Items.Add(empleado.ToString());
+                            await Task.Delay(200);
+                        }
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        MessageBox.Show($"Error al actualizar la lista: {ex.Message}", "Error al mostrar la lista", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+                this.btnOrdenarLista.Text = "Ordenar";
+                this.btnOrdenarLista.Enabled = true;
             }
         }
 
@@ -96,7 +122,7 @@ namespace WinFormsApp1
                 if (formEmpleado.DialogResult == DialogResult.OK)
                 {
                     if (this.AgregarEmpleado(formEmpleado.NuevoEmpleado, formEmpleado))
-                    {                        
+                    {
                         break;
                     }
                 }
@@ -121,15 +147,15 @@ namespace WinFormsApp1
                 this.ActualizarLista();
                 if (formEmpleado is FrmMesero)
                 {
-                    miAdminBD.AgregarEmpleadoBD((Mesero)empleadoParaAgregar);
+                    administradorBD.AgregarEmpleadoBD((Mesero)empleadoParaAgregar);
                 }
                 else if (formEmpleado is FrmCocinero)
                 {
-                    miAdminBD.AgregarEmpleadoBD((Cocinero)empleadoParaAgregar);
+                    administradorBD.AgregarEmpleadoBD((Cocinero)empleadoParaAgregar);
                 }
                 else
                 {
-                    miAdminBD.AgregarEmpleadoBD((Cajero)empleadoParaAgregar);
+                    administradorBD.AgregarEmpleadoBD((Cajero)empleadoParaAgregar);
                 }
             }
             else
@@ -155,7 +181,7 @@ namespace WinFormsApp1
             {
                 bool eliminado = this.empleadosActuales - empleadoAEliminar;
                 string tabla = (empleadoAEliminar is Mesero) ? "meseros" : (empleadoAEliminar is Cocinero) ? "cocineros" : "cajeros";
-                _ = miAdminBD.EliminarEmpleadoPorLegajo(empleadoAEliminar.Legajo, tabla);
+                _ = administradorBD.EliminarEmpleadoPorLegajo(empleadoAEliminar.Legajo, tabla);
 
                 if (eliminado)
                 {
@@ -214,8 +240,8 @@ namespace WinFormsApp1
                     {
                         int legajoOriginal = this.empleadosActuales.listaDeEmpleados[indice].Legajo;
                         this.empleadosActuales.listaDeEmpleados[indice] = frmEmpleadoSeleccionado.NuevoEmpleado;
-                        miAdminBD.ModificarEmpleadoPorLegajo(frmEmpleadoSeleccionado.NuevoEmpleado, legajoOriginal);
-                        this.ActualizarLista();
+                        administradorBD.ModificarEmpleadoPorLegajo(frmEmpleadoSeleccionado.NuevoEmpleado, legajoOriginal);
+                        this.actualizarListaTask = Task.Run(() => { this.ActualizarLista(); });
                         break;
                     }
                 }
@@ -234,9 +260,9 @@ namespace WinFormsApp1
         /// <param name="e"></param>
         private void FrmCRUD_Load(object sender, EventArgs e)
         {
-            this.miAdminLog.GuardarArchivo(@"..\..\..\Usuarios_logeados.log", this.delegadoMostrarDatos.Invoke());
-            this.empleadosActuales.listaDeEmpleados = miAdminBD.ObtenerListaEmpleados();
-            this.ActualizarLista();
+            this.administradorLog.GuardarArchivo(@"..\..\..\Usuarios_logeados.log", this.delegadoMostrarDatos.Invoke());
+            this.empleadosActuales.listaDeEmpleados = administradorBD.ObtenerListaEmpleados();
+            this.actualizarListaTask = Task.Run(() => { this.ActualizarLista(); });
         }
 
         private void DeserializarJson(string path)
@@ -265,10 +291,10 @@ namespace WinFormsApp1
                         this.empleadosActuales.listaDeEmpleados.Add(cajero);
                     }
                 }
-                this.ActualizarLista();
+                this.actualizarListaTask = Task.Run(() => { this.ActualizarLista(); });
             }
         }
-        
+
         private void FrmCRUD_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("¿Desea salir de la aplicación?", "Confirmación de cierre", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -308,7 +334,7 @@ namespace WinFormsApp1
                 this.empleadosActuales.OrdenarLista("legajo", rdoAscendente.Checked);
             }
 
-            this.ActualizarLista();
+            this.actualizarListaTask = Task.Run(() => { this.ActualizarLista(); });
         }
 
         /// <summary>
@@ -327,7 +353,7 @@ namespace WinFormsApp1
             string estadoHorasExtras;
             Empleado empleadoSeleccionado = this.empleadosActuales.listaDeEmpleados[indice];
             empleadoSeleccionado.CambiarDisponibilidadHorasExtras();
-            miAdminBD.ModificarEmpleadoPorLegajo(empleadoSeleccionado, empleadoSeleccionado.Legajo);
+            administradorBD.ModificarEmpleadoPorLegajo(empleadoSeleccionado, empleadoSeleccionado.Legajo);
             estadoHorasExtras = empleadoSeleccionado.DisponibleHorasExtras ? "Disponible para realizar horas extras." : "No disponible para realizar horas extras.";
             MessageBox.Show($"{empleadoSeleccionado.Nombre}: {estadoHorasExtras}", "Cambio de horas extras", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
