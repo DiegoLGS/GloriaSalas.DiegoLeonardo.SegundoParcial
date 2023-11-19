@@ -13,17 +13,34 @@ namespace WinFormsEmpleados
 {
     public partial class FrmRegistroUsuarios : Form
     {
-        private AdministradorArchivos<string> adminLog;
+        private AdministradorArchivos<string> administradorLog;
+        private delegate void DelegadoCargarLista();
+        private Task cargarListaTask;
 
         public FrmRegistroUsuarios()
         {
             InitializeComponent();
-            adminLog = new AdministradorArchivos<string>();
+            administradorLog = new AdministradorArchivos<string>();
         }
 
         private void FrmRegistroUsuarios_Load(object sender, EventArgs e)
         {
-            this.txtRegistroUsuarios.Text = adminLog.CargarArchivo(@"..\..\..\Usuarios_logeados.log");
+            cargarListaTask = Task.Run(() => CargarRegistroUsuarios());
+        }
+
+        private async void CargarRegistroUsuarios()
+        {
+            if (this.InvokeRequired)
+            {
+                DelegadoCargarLista delegadoCargar = new DelegadoCargarLista(CargarRegistroUsuarios);
+                this.Invoke(delegadoCargar);
+            }
+            else
+            {
+                this.txtRegistroUsuarios.Text = "Cargando historial de usuarios logeados...";
+                await Task.Delay(2000);
+                this.txtRegistroUsuarios.Text = administradorLog.CargarArchivo(@"..\..\..\Usuarios_logeados.log");
+            }
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)

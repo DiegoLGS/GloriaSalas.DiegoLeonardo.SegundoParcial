@@ -61,6 +61,10 @@ namespace WinFormsApp1
             }
         }
 
+        /// <summary>
+        /// ActualizarLista() actualiza visualmente la lista de empleados con un leve delay para simular
+        /// un tiempo de respuesta.
+        /// </summary>
         private async void ActualizarLista()
         {
             if (this.InvokeRequired)
@@ -72,16 +76,23 @@ namespace WinFormsApp1
             {
                 this.btnOrdenarLista.Enabled = false;
                 this.btnOrdenarLista.Text = "Cargando lista...";
+                this.prgListaEmpleados.Visible = true;
+                this.prgListaEmpleados.Minimum = 0;
+                this.prgListaEmpleados.Maximum = this.empleadosActuales.listaDeEmpleados.Count;
                 this.lstEmpleados.Items.Clear();
 
                 if (this.empleadosActuales.listaDeEmpleados != null && this.empleadosActuales.listaDeEmpleados.Any())
                 {
                     try
                     {
+                        int progreso = 0;
+
                         foreach (Empleado empleado in this.empleadosActuales.listaDeEmpleados)
                         {
+                            progreso++;
+                            this.prgListaEmpleados.Value = progreso;
+                            await Task.Delay(250);
                             lstEmpleados.Items.Add(empleado.ToString());
-                            await Task.Delay(200);
                         }
                     }
                     catch (InvalidOperationException ex)
@@ -93,6 +104,8 @@ namespace WinFormsApp1
                         MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                this.prgListaEmpleados.Visible = false;
+                this.prgListaEmpleados.Value = this.prgListaEmpleados.Minimum;
                 this.btnOrdenarLista.Text = "Ordenar";
                 this.btnOrdenarLista.Enabled = true;
             }
@@ -144,7 +157,8 @@ namespace WinFormsApp1
 
             if (respuesta)
             {
-                this.ActualizarLista();
+                this.actualizarListaTask = Task.Run(() => { this.ActualizarLista(); });
+
                 if (formEmpleado is FrmMesero)
                 {
                     administradorBD.AgregarEmpleadoBD((Mesero)empleadoParaAgregar);
@@ -185,7 +199,7 @@ namespace WinFormsApp1
 
                 if (eliminado)
                 {
-                    this.ActualizarLista();
+                    this.actualizarListaTask = Task.Run(() => { this.ActualizarLista(); });
                 }
             }
         }
@@ -361,7 +375,7 @@ namespace WinFormsApp1
         private void btnVerRegistrosUsuarios_Click(object sender, EventArgs e)
         {
             FrmRegistroUsuarios formHistorialUsuarios = new FrmRegistroUsuarios();
-            formHistorialUsuarios.ShowDialog();
+            formHistorialUsuarios.Show();
         }
 
         private void btnGuardarEmpleados_Click(object sender, EventArgs e)

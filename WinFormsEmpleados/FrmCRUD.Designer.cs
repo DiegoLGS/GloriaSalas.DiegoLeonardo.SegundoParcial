@@ -52,6 +52,7 @@
             btnGuardarEmpleados = new Button();
             btnCargarEmpleados = new Button();
             grpGuardarCargar = new GroupBox();
+            prgListaEmpleados = new ProgressBar();
             grpParametro.SuspendLayout();
             grpOrden.SuspendLayout();
             grpGuardarCargar.SuspendLayout();
@@ -138,7 +139,7 @@
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.Location = new Point(276, 470);
+            lblUsuario.Location = new Point(277, 497);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(47, 15);
             lblUsuario.TabIndex = 8;
@@ -147,7 +148,7 @@
             // lblOrdenarLista
             // 
             lblOrdenarLista.AutoSize = true;
-            lblOrdenarLista.Location = new Point(35, 365);
+            lblOrdenarLista.Location = new Point(36, 392);
             lblOrdenarLista.Name = "lblOrdenarLista";
             lblOrdenarLista.Size = new Size(74, 15);
             lblOrdenarLista.TabIndex = 9;
@@ -157,7 +158,7 @@
             // 
             grpParametro.Controls.Add(rdoPorLegajo);
             grpParametro.Controls.Add(rdoPorNombre);
-            grpParametro.Location = new Point(35, 383);
+            grpParametro.Location = new Point(36, 410);
             grpParametro.Name = "grpParametro";
             grpParametro.Size = new Size(108, 73);
             grpParametro.TabIndex = 10;
@@ -191,7 +192,7 @@
             // 
             grpOrden.Controls.Add(rdoAscendente);
             grpOrden.Controls.Add(rdoDescendente);
-            grpOrden.Location = new Point(163, 383);
+            grpOrden.Location = new Point(164, 410);
             grpOrden.Name = "grpOrden";
             grpOrden.Size = new Size(102, 73);
             grpOrden.TabIndex = 11;
@@ -223,7 +224,7 @@
             // 
             // btnOrdenarLista
             // 
-            btnOrdenarLista.Location = new Point(271, 392);
+            btnOrdenarLista.Location = new Point(272, 419);
             btnOrdenarLista.Name = "btnOrdenarLista";
             btnOrdenarLista.Size = new Size(85, 64);
             btnOrdenarLista.TabIndex = 11;
@@ -243,7 +244,7 @@
             // 
             // btnVerRegistrosUsuarios
             // 
-            btnVerRegistrosUsuarios.Location = new Point(35, 466);
+            btnVerRegistrosUsuarios.Location = new Point(36, 493);
             btnVerRegistrosUsuarios.Name = "btnVerRegistrosUsuarios";
             btnVerRegistrosUsuarios.Size = new Size(100, 23);
             btnVerRegistrosUsuarios.TabIndex = 14;
@@ -279,18 +280,27 @@
             // 
             grpGuardarCargar.Controls.Add(btnGuardarEmpleados);
             grpGuardarCargar.Controls.Add(btnCargarEmpleados);
-            grpGuardarCargar.Location = new Point(362, 365);
+            grpGuardarCargar.Location = new Point(363, 392);
             grpGuardarCargar.Name = "grpGuardarCargar";
             grpGuardarCargar.Size = new Size(200, 100);
             grpGuardarCargar.TabIndex = 18;
             grpGuardarCargar.TabStop = false;
             grpGuardarCargar.Text = "Guardar / Cargar empleados";
             // 
+            // prgListaEmpleados
+            // 
+            prgListaEmpleados.Location = new Point(35, 359);
+            prgListaEmpleados.Name = "prgListaEmpleados";
+            prgListaEmpleados.Size = new Size(392, 23);
+            prgListaEmpleados.TabIndex = 19;
+            prgListaEmpleados.Visible = false;
+            // 
             // FrmCRUD
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(578, 494);
+            ClientSize = new Size(578, 524);
+            Controls.Add(prgListaEmpleados);
             Controls.Add(grpGuardarCargar);
             Controls.Add(btnVerRegistrosUsuarios);
             Controls.Add(btnCambiarHorasExtra);
@@ -349,5 +359,6 @@
         private Button btnGuardarEmpleados;
         private Button btnCargarEmpleados;
         private GroupBox grpGuardarCargar;
+        private ProgressBar prgListaEmpleados;
     }
 }
