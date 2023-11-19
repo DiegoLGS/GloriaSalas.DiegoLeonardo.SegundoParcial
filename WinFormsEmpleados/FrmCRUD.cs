@@ -15,8 +15,10 @@ namespace WinFormsApp1
         private AdministradorArchivos<string> administradorLog;
         private Func<string> delegadoObtenerNombreYFecha;
         private Func<string> delegadoMostrarDatos;
-        private delegate void DelegadoActualizarLista();
         private Task actualizarListaTask;
+        private delegate void DelegadoActualizarLista();
+        public delegate void CambioHorasExtrasEventHandler(Empleado empleado);
+        public event CambioHorasExtrasEventHandler CambioHorasExtras;
 
         public FrmCRUD(Func<string> delegadoObtenerNombreYFecha, Func<string> delegadoMostrarDatos, string perfilUsuario)
         {
@@ -28,6 +30,7 @@ namespace WinFormsApp1
             this.delegadoMostrarDatos = delegadoMostrarDatos;
             this.lblUsuario.Text = this.delegadoObtenerNombreYFecha.Invoke();
             this.AdministrarPermisosUsuario(perfilUsuario);
+            this.CambioHorasExtras += MostrarCambioHorasExtras;
         }
 
         private void AdministrarPermisosUsuario(string perfilUsuario)
@@ -364,10 +367,16 @@ namespace WinFormsApp1
             {
                 return;
             }
-            string estadoHorasExtras;
+
             Empleado empleadoSeleccionado = this.empleadosActuales.listaDeEmpleados[indice];
             empleadoSeleccionado.CambiarDisponibilidadHorasExtras();
             administradorBD.ModificarEmpleadoPorLegajo(empleadoSeleccionado, empleadoSeleccionado.Legajo);
+            this.CambioHorasExtras.Invoke(empleadoSeleccionado);            
+        }
+
+        private void MostrarCambioHorasExtras(Empleado empleadoSeleccionado)
+        {
+            string estadoHorasExtras;
             estadoHorasExtras = empleadoSeleccionado.DisponibleHorasExtras ? "Disponible para realizar horas extras." : "No disponible para realizar horas extras.";
             MessageBox.Show($"{empleadoSeleccionado.Nombre}: {estadoHorasExtras}", "Cambio de horas extras", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
