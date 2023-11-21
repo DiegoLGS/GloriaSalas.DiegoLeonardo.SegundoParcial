@@ -106,10 +106,18 @@ namespace PrimerParcial
                 {
                     respuesta = true;
                 }
+                else
+                {
+                    throw new ComandoBDException("La ejecución del comando no afectó el número esperado de filas en la base de datos.");
+                }
             }
             catch (SqlException sqlEx)
             {
                 MessageBox.Show($"Se produjo un error con la base de datos: {sqlEx.Message}");
+            }
+            catch (ComandoBDException ex)
+            {
+                MessageBox.Show($"Error al ejecutar comando en la base de datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

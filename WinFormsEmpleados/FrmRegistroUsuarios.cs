@@ -32,7 +32,7 @@ namespace WinFormsEmpleados
         {
             if (this.InvokeRequired)
             {
-                DelegadoCargarLista delegadoCargar = new DelegadoCargarLista(CargarRegistroUsuarios);
+                DelegadoCargarLista delegadoCargar = new DelegadoCargarLista(this.CargarRegistroUsuarios);
                 this.Invoke(delegadoCargar);
             }
             else

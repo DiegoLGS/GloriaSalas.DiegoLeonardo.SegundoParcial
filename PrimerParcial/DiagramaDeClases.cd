@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="PrimerParcial.Cajero">
-    <Position X="4.25" Y="3.75" Width="2.5" />
+    <Position X="7.5" Y="0.5" Width="6" />
     <InheritanceLine Type="PrimerParcial.Empleado" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="3.375" Y="5.199" />
-        <Point X="3.375" Y="6.77" />
-        <Point X="5.375" Y="6.77" />
-        <Point X="5.375" Y="6.655" />
+        <Point X="5.5" Y="3.875" />
+        <Point X="5.875" Y="3.875" />
+        <Point X="5.875" Y="0.198" />
+        <Point X="10.375" Y="0.198" />
+        <Point X="10.375" Y="0.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -16,15 +17,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PrimerParcial.Cocinero">
-    <Position X="9.75" Y="3.75" Width="2.5" />
-    <InheritanceLine Type="PrimerParcial.Empleado" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <Position X="21.5" Y="0.5" Width="6.25" />
+    <InheritanceLine Type="PrimerParcial.Empleado" ManuallyRouted="true" FixedFromPoint="true">
       <Path>
-        <Point X="1.625" Y="5.199" />
-        <Point X="1.625" Y="5.786" />
-        <Point X="1.615" Y="5.786" />
-        <Point X="1.615" Y="6.979" />
-        <Point X="10.562" Y="6.979" />
-        <Point X="10.562" Y="6.655" />
+        <Point X="5.5" Y="3.5" />
+        <Point X="5.875" Y="3.5" />
+        <Point X="5.875" Y="0.198" />
+        <Point X="24.625" Y="0.198" />
+        <Point X="24.625" Y="0.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -33,27 +33,29 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PrimerParcial.Empleado">
-    <Position X="1.25" Y="0.5" Width="2.5" />
+    <Position X="0.5" Y="0.5" Width="5" />
     <TypeIdentifier>
-      <HashCode>AAAQIAAAAAAAgAiEgIAAhAAgAAQAAAAAAABAAAAAAiA=</HashCode>
+      <HashCode>AAAQIAAAAAAAgAiMgIAAhAAgAAQAAAAAAABAAAAAAiA=</HashCode>
       <FileName>Empleado.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="PrimerParcial.ListadoEmpleados">
-    <Position X="7" Y="0.5" Width="2.5" />
+  <Class Name="PrimerParcial.ListadoEmpleados&lt;T&gt;">
+    <Position X="8.75" Y="4.5" Width="6" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAAQAEAAAAACAAAAAAAAAAAAAAAAiQ=</HashCode>
+      <HashCode>AAACBAAAAAAAAAAAQAEAAAAACAAAAAAAAAAAAAAAAiQ=</HashCode>
       <FileName>ListadoEmpleados.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PrimerParcial.Mesero">
-    <Position X="7" Y="3.75" Width="2.5" />
+    <Position X="14.25" Y="0.5" Width="6.5" />
     <InheritanceLine Type="PrimerParcial.Empleado" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="2.5" Y="5.199" />
-        <Point X="2.5" Y="6.854" />
-        <Point X="8.25" Y="6.854" />
-        <Point X="8.25" Y="6.655" />
+        <Point X="5.5" Y="3.688" />
+        <Point X="5.875" Y="3.688" />
+        <Point X="5.875" Y="0.198" />
+        <Point X="17.5" Y="0.198" />
+        <Point X="17.5" Y="0.5" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -62,14 +64,65 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PrimerParcial.Usuario">
-    <Position X="9.75" Y="0.5" Width="2.5" />
+    <Position X="0.75" Y="8.25" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAAAQBAACMAAAAAAAAAAQAAACACAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAQBAACEgAAAAAAAAAQAAACACAAQAAAAAAA=</HashCode>
       <FileName>Usuario.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
+  <Class Name="PrimerParcial.AdministradorArchivos&lt;T&gt;">
+    <Position X="6.25" Y="10.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAEBAAIAAAAAA=</HashCode>
+      <FileName>AdministradorArchivos.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PrimerParcial.AdministradorBD">
+    <Position X="12.5" Y="8.25" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAEgAAAAEAAkABAAAAAAAAAIAABAIBAAAAAAAAAAE=</HashCode>
+      <FileName>AdministradorBD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.ListaUsuariosNoCargadaException">
+    <Position X="0.75" Y="13.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListaUsuariosNoCargadaException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrimerParcial.ComandoBDException">
+    <Position X="6.5" Y="13.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ComandoBDException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="PrimerParcial.IMostrarDatos">
+    <Position X="1.25" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IMostrarDatos.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PrimerParcial.ICargarArchivo&lt;T&gt;">
+    <Position X="5.5" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>ICargarArchivo.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PrimerParcial.IGuardarArchivo&lt;T&gt;">
+    <Position X="8.25" Y="8.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IGuardarArchivo.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="ETurnos">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAQAAAAAAAAAAAAQCAAAAIAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>Enumerados.cs</FileName>

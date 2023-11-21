@@ -185,6 +185,7 @@
     <Compile Include="AdministradorArchivos.cs" />
     <Compile Include="Cajero.cs" />
     <Compile Include="Cocinero.cs" />
+    <Compile Include="ComandoBDException.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="Enumerados.cs" />
     <Compile Include="ICargarArchivo.cs" />

@@ -1,75 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="WinFormsEmpleados.FrmCajero">
-    <Position X="8.75" Y="1" Width="2.25" />
-    <InheritanceLine Type="WinFormsEmpleados.FrmEmpleado" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.578" Y="6.482" />
-        <Point X="7.578" Y="6.732" />
-        <Point X="9.524" Y="6.732" />
-        <Point X="9.524" Y="5.252" />
-      </Path>
-    </InheritanceLine>
+    <Position X="7" Y="1" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAACAAACABEAAAAUCUAAACBAAAAAAAAAAAAEgAAAA=</HashCode>
       <FileName>FrmCajero.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WinFormsEmpleados.FrmCocinero">
-    <Position X="11.5" Y="1" Width="2.25" />
-    <InheritanceLine Type="WinFormsEmpleados.FrmEmpleado" ManuallyRouted="true" FixedFromPoint="true">
-      <Path>
-        <Point X="6.945" Y="6.482" />
-        <Point X="6.945" Y="6.847" />
-        <Point X="12.625" Y="6.847" />
-        <Point X="12.625" Y="6.213" />
-      </Path>
-    </InheritanceLine>
+    <Position X="11.5" Y="1" Width="4" />
     <TypeIdentifier>
       <HashCode>AgIQAAAIACABQAAAAQKQAAACCAAAAgCAgCQAAAAAAAA=</HashCode>
       <FileName>FrmCocinero.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WinFormsEmpleados.FrmEmpleado">
-    <Position X="5.75" Y="0.5" Width="2.25" />
+    <Position X="1.25" Y="1" Width="5" />
     <TypeIdentifier>
-      <HashCode>AAAALAAQCCCBAIgABACCAAACACBIBAAAAAQAAAABBAI=</HashCode>
+      <HashCode>AAAALAAQCCCBAIgABACSAAACACBIBAAAAAQAAAABBAI=</HashCode>
       <FileName>FrmEmpleado.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WinFormsEmpleados.FrmLogin">
-    <Position X="17" Y="1" Width="2.25" />
+    <Position X="7.5" Y="7.25" Width="4.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="WinFormsEmpleados.FrmLogin.DelegadoLogin">
+        <TypeIdentifier>
+          <NewMemberFileName>FrmLogin.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="WinFormsEmpleados.FrmLogin.LoginFalladoEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>FrmLogin.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>IAgAAIAAACIAAQACAACAAAACAAAAAAAAAiAAAAAACBA=</HashCode>
+      <HashCode>IAgAAIAAACIAAQATAAKQAAACAAAAAAAAAiAAAAAAABA=</HashCode>
       <FileName>FrmLogin.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WinFormsEmpleados.FrmMesero">
-    <Position X="14.25" Y="1" Width="2.25" />
-    <InheritanceLine Type="WinFormsEmpleados.FrmEmpleado" ManuallyRouted="true" FixedFromPoint="true">
-      <Path>
-        <Point X="6.382" Y="6.482" />
-        <Point X="6.382" Y="6.941" />
-        <Point X="15.375" Y="6.941" />
-        <Point X="15.375" Y="5.444" />
-      </Path>
-    </InheritanceLine>
+    <Position X="16" Y="1" Width="4" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAgCARAAAAAQCAAAECAAAAAAAABEAAAAAIAII=</HashCode>
       <FileName>FrmMesero.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WinFormsApp1.FrmCRUD">
-    <Position X="19.5" Y="0.5" Width="2.5" />
+    <Position X="21.25" Y="1" Width="7.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="WinFormsApp1.FrmCRUD.DelegadoActualizarLista">
+        <TypeIdentifier>
+          <NewMemberFileName>FrmCRUD.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="WinFormsApp1.FrmCRUD.CambioHorasExtrasEventHandler">
+        <TypeIdentifier>
+          <NewMemberFileName>FrmCRUD.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>JAiANBAFBCgAgBJCABCAYQACywAAQAAkhDAAoQQECIA=</HashCode>
+      <HashCode>JAiQNBAEBCgAgBJCABCAYQACywwAQAAkhDAAoQQESMA=</HashCode>
       <FileName>FrmCRUD.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WinFormsEmpleados.FrmRegistroUsuarios">
-    <Position X="22.25" Y="0.5" Width="2" />
+    <Position X="13.25" Y="7.5" Width="4" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="WinFormsEmpleados.FrmRegistroUsuarios.DelegadoCargarLista">
+        <TypeIdentifier>
+          <NewMemberFileName>FrmRegistroUsuarios.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AACAAAAAAKAAAAAAAACIAAACAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AACAAABAAKAAAAAAAACIAAACAEAAAAAAAAAAAEAAAAA=</HashCode>
       <FileName>FrmRegistroUsuarios.cs</FileName>
     </TypeIdentifier>
   </Class>

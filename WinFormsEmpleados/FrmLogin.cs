@@ -12,15 +12,16 @@ using System.Windows.Forms;
 
 namespace WinFormsEmpleados
 {
-    public delegate void LoginFalladoEventHandler(int intentos, Form formulario);
-
     public partial class FrmLogin : Form
     {
         private List<Usuario> listaUsuarios;
         private Usuario usuarioLogeado;
-        public event LoginFalladoEventHandler LoginFallado;
+        private delegate void LoginFalladoEventHandler(int intentos, Form formulario);
+        private event LoginFalladoEventHandler LoginFallado;
         private int numeroIntento;
-        private AdministradorArchivos<List<Usuario>> adminJson;
+        private AdministradorArchivos<List<Usuario>> administradorJson;
+        private delegate void DelegadoLogin();
+        private Task loginTask;
 
         public Usuario UsuarioLogeado
         {
@@ -33,46 +34,67 @@ namespace WinFormsEmpleados
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.numeroIntento = 0;
-            this.adminJson = new AdministradorArchivos<List<Usuario>>();
-            this.listaUsuarios = adminJson.CargarArchivo(@"..\..\..\MOCK_DATA.json");
+            this.administradorJson = new AdministradorArchivos<List<Usuario>>();
+            this.listaUsuarios = administradorJson.CargarArchivo(@"..\..\..\MOCK_DATA.json");
             this.LoginFallado += AdministradorArchivos<List<Usuario>>.IntentosLogin;
         }        
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            loginTask = Task.Run(() => IniciarSesion());
+
+        }
+
+        private void IniciarSesion()
+        {
             try
             {
-                if (this.listaUsuarios == null)
-                {
-                    throw new ListaUsuariosNoCargadaException("\nLa lista de usuarios no se ha cargado correctamente. Contáctese con un administrador.");
-                }
-
-                Usuario usuarioNuevo = null;
-
-                foreach (Usuario usuario in this.listaUsuarios)
-                {
-                    if (this.txtCorreo.Text == usuario.correo && this.txtPassword.Text == usuario.clave)
-                    {
-                        usuarioNuevo = usuario;
-                        break;
-                    }
-                }
-
-                if (usuarioNuevo != null)
-                {
-                    this.UsuarioLogeado = usuarioNuevo;
-                    this.DialogResult = DialogResult.OK;
+                if (this.InvokeRequired)
+                {                    
+                    DelegadoLogin delegadoLogin = new DelegadoLogin(this.IniciarSesion);
+                    this.Invoke(delegadoLogin);
                 }
                 else
                 {
-                    this.numeroIntento++;
-                    this.LoginFallado.Invoke(this.numeroIntento, this);
+
+                    if (this.listaUsuarios == null)
+                    {
+                        throw new ListaUsuariosNoCargadaException("\nLa lista de usuarios no se ha cargado correctamente. Contáctese con un administrador.");
+                    }
+
+                    Usuario usuarioNuevo = null;
+
+                    foreach (Usuario usuario in this.listaUsuarios)
+                    {
+                        if (this.txtCorreo.Text == usuario.correo && this.txtPassword.Text == usuario.clave)
+                        {
+                            usuarioNuevo = usuario;
+                            break;
+                        }
+                    }
+
+                    if (usuarioNuevo != null)
+                    {
+                        this.UsuarioLogeado = usuarioNuevo;
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        this.numeroIntento++;
+                        this.LoginFallado.Invoke(this.numeroIntento, this);
+                    }
+
                 }
+            }
+            catch (ListaUsuariosNoCargadaException ex)
+            {
+                MessageBox.Show($"Error al intentar cargar la lista de usuarios habilitados: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Se produjo un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }            
+
         }
 
         private void FrmLogin_KeyPress(object sender, KeyPressEventArgs e)

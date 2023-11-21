@@ -17,8 +17,10 @@ namespace WinFormsApp1
         private Func<string> delegadoMostrarDatos;
         private Task actualizarListaTask;
         private delegate void DelegadoActualizarLista();
-        public delegate void CambioHorasExtrasEventHandler(Empleado empleado);
-        public event CambioHorasExtrasEventHandler CambioHorasExtras;
+        private delegate void CambioHorasExtrasEventHandler(Empleado empleado);
+        private event CambioHorasExtrasEventHandler CambioHorasExtras;
+        public delegate string MostrarDetallesEmpleadoEventHandler(string titulo);
+        public event MostrarDetallesEmpleadoEventHandler MostrarDetallesEmpleado;
 
         public FrmCRUD(Func<string> delegadoObtenerNombreYFecha, Func<string> delegadoMostrarDatos, string perfilUsuario)
         {
@@ -94,7 +96,7 @@ namespace WinFormsApp1
                         {
                             progreso++;
                             this.prgListaEmpleados.Value = progreso;
-                            await Task.Delay(250);
+                            await Task.Delay(200);
                             lstEmpleados.Items.Add(empleado.ToString());
                         }
                     }
@@ -336,8 +338,14 @@ namespace WinFormsApp1
             }
 
             Empleado empleadoSeleccionado = this.empleadosActuales.listaDeEmpleados[indice];
+            this.MostrarDetallesEmpleado = empleadoSeleccionado.MostrarDatos;
             string titulo = $"Información particular de {empleadoSeleccionado.Nombre}";
-            MessageBox.Show(empleadoSeleccionado.MostrarDatos(titulo), "Informacion detallada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.MostrarInformacionEmpleado(this.MostrarDetallesEmpleado, titulo);
+        }
+
+        private void MostrarInformacionEmpleado(MostrarDetallesEmpleadoEventHandler evento, string titulo)
+        {
+            MessageBox.Show(evento.Invoke(titulo), "Informacion detallada", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnOrdenarLista_Click(object sender, EventArgs e)
@@ -399,6 +407,14 @@ namespace WinFormsApp1
             }
         }
 
+
+        /// <summary>
+        /// btnCargarEmpleados_Click() Sirve para cargar externamente una lista JSON. Se debe tener en cuenta
+        /// que la aplicación intentará reflejar las modificaciones en la base de datos por lo que se 
+        /// recomienda usar con cuidado para evitar errores.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCargarEmpleados_Click(object sender, EventArgs e)
         {
             OpenFileDialog cargarEmpleadosDialog = new OpenFileDialog();
